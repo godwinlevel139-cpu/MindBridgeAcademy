@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mind Bridge Academy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Mind Bridge Logo">
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Main content -->
+<div class="container" style="padding: 30px;">
+    <h1>Welcome to Mind Bridge Academy</h1>
+    <p>Your learning journey starts here. Register, select courses, and access resources.</p>
+
+    <a href="/register" class="btn btn-primary">Register as Student</a>
+    <a href="/students" class="btn btn-success">View Registered Students</a>
+</div>
+
+<!-- Footer -->
+<footer>
+    &copy; 2026 Mind Bridge Academy. All rights reserved.
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

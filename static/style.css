@@ -1,0 +1,79 @@
+/* ===== Body & Layout ===== */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== Navbar / Header ===== */
+.navbar {
+    background-color: #004080;
+    padding: 10px 20px;
+}
+
+.navbar .navbar-brand {
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    margin-left: 15px;
+}
+
+.navbar .nav-link:hover {
+    color: #ffcc00;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+    border-color: #1c7430;
+}
+
+/* ===== Forms ===== */
+form input, form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* ===== Footer ===== */
+footer {
+    background-color: #e9ecef;
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+/* ===== Logo ===== */
+.logo {
+    height: 60px;
+    width: auto;
+}

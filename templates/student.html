@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registered Students</title>
+</head>
+<body>
+    <h2>Registered Students</h2>
+
+    <table border="1">
+        {% for student in students %}
+        <tr>
+            {% for item in student %}
+            <td>{{ item }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <a href="/admin/dashboard">Back</a>
+</body>
+</html>
