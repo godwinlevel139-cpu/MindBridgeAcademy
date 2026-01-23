@@ -1,90 +1,149 @@
-
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-import csv
 import os
+import csv
+import requests
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 
 app = Flask(__name__)
-# Use environment variable for security; fallback key if not set
-app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback_secret_key")
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "dev-secret")
 
+# ================= CONFIG =================
 STUDENT_FILE = "students.csv"
 
-# Admin credentials
-ADMIN_EMAIL = "admin@mindbridgeacademy.com"
-ADMIN_PASSWORD = "admin123"
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@mindbridgeacademy.com")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 
-# ---------------- HOME ----------------
+PAYSTACK_SECRET_KEY = os.environ.get("PAYSTACK_SECRET_KEY", "")
+
+COURSE_PRICES = {
+    "AI": 120,
+    "Digital Marketing": 80,
+    "Mathematics": 50,
+    "English": 40,
+    "Chemistry": 70,
+    "Biology": 70,
+    "Physics": 70,
+    "Special Education": 100,
+    "Academic Counselling": 30
+}
+
+# ================= ROUTES =================
+
 @app.route("/")
 def home():
     return render_template("home.html")
 
-# ---------------- ADMIN LOGIN ----------------
+
+# -------- STUDENT REGISTRATION --------
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        courses = request.form.getlist("courses")
+
+        total = sum(COURSE_PRICES.get(c, 0) for c in courses)
+
+        file_exists = os.path.exists(STUDENT_FILE)
+        with open(STUDENT_FILE, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(["Name", "Email", "Courses", "Total Fee"])
+            writer.writerow([name, email, ", ".join(courses), total])
+
+        return render_template("payment.html", email=email, total=total)
+
+    return render_template("register.html", prices=COURSE_PRICES)
+
+
+# -------- PAYSTACK PAYMENT --------
+@app.route("/pay", methods=["POST"])
+def pay():
+    email = request.form["email"]
+    amount = int(float(request.form["amount"]) * 100)  # dollars → cents
+
+    headers = {
+        "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    data = {
+        "email": email,
+        "amount": amount,
+        "currency": "USD"
+    }
+
+    response = requests.post(
+        "https://api.paystack.co/transaction/initialize",
+        headers=headers,
+        json=data
+    ).json()
+
+    if response.get("status"):
+        return redirect(response["data"]["authorization_url"])
+
+    return "Payment initialization failed"
+
+
+# -------- ADMIN LOGIN --------
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-
-        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+        if (
+            request.form["email"] == ADMIN_EMAIL and
+            request.form["password"] == ADMIN_PASSWORD
+        ):
             session["admin"] = True
             return redirect(url_for("admin_dashboard"))
-        else:
-            flash("Invalid login credentials")
+
+        flash("Invalid admin credentials", "error")
 
     return render_template("login.html")
 
-# ---------------- ADMIN LOGOUT ----------------
+
 @app.route("/admin/logout")
 def admin_logout():
-    session.pop("admin", None)
+    session.clear()
     return redirect(url_for("home"))
 
-# ---------------- ADMIN DASHBOARD ----------------
+
+# -------- ADMIN DASHBOARD --------
 @app.route("/admin/dashboard")
 def admin_dashboard():
     if not session.get("admin"):
-        flash("Please log in as admin")
         return redirect(url_for("admin_login"))
-    return render_template("admin_dashboard.html")
 
-# ---------------- VIEW STUDENTS ----------------
+    students = []
+    total_revenue = 0
+
+    if os.path.exists(STUDENT_FILE):
+        with open(STUDENT_FILE, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                students.append(row)
+                total_revenue += float(row["Total Fee"])
+
+    return render_template(
+        "admin_dashboard.html",
+        student_count=len(students),
+        revenue=total_revenue
+    )
+
+
+# -------- VIEW STUDENTS (ADMIN ONLY) --------
 @app.route("/admin/students")
 def view_students():
     if not session.get("admin"):
-        flash("Access denied")
         return redirect(url_for("admin_login"))
 
     students = []
     if os.path.exists(STUDENT_FILE):
         with open(STUDENT_FILE, newline="", encoding="utf-8") as f:
-            reader = csv.reader(f)
+            reader = csv.DictReader(f)
             students = list(reader)
 
     return render_template("students.html", students=students)
 
-# ---------------- REGISTER STUDENT ----------------
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        courses = request.form.getlist("courses")
 
-        if not name or not email or not courses:
-            flash("Please fill all required fields and select at least one course")
-            return redirect(url_for("home"))
-
-        courses_str = ", ".join(courses)
-
-        with open(STUDENT_FILE, "a", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow([name, email, courses_str])
-
-        flash("Registration successful!")
-        return redirect(url_for("home"))
-
-    return render_template("home.html")
-
-# ---------------- RUN ----------------
+# ================= RUN =================
 if __name__ == "__main__":
     app.run(debug=True)
