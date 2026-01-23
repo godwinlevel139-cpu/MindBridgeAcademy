@@ -1,12 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard | MindBridge Academy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        a.button {
+            display: inline-block;
+            padding: 12px 18px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a.button:hover {
+            background: #1d4ed8;
+        }
+    </style>
 </head>
 <body>
-    <h1>Admin Dashboard</h1>
 
-    <a href="/admin/students">View Students</a><br><br>
-    <a href="/admin/logout">Logout</a>
+<header>
+    <h1>MindBridge Academy – Admin Dashboard</h1>
+</header>
+
+<div class="container">
+    <div class="card">
+        <h2>📊 Overview</h2>
+        <p><strong>Total Registered Students:</strong> {{ students }}</p>
+        <p><strong>Total Revenue:</strong> ${{ revenue }}</p>
+    </div>
+
+    <div class="card">
+        <h2>👨‍🎓 Student Management</h2>
+        <a href="{{ url_for('view_students') }}" class="button">View Registered Students</a>
+    </div>
+
+    <div class="card">
+        <a href="{{ url_for('admin_logout') }}" class="button" style="background:#dc2626;">Logout</a>
+    </div>
+</div>
+
 </body>
 </html>
