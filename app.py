@@ -1,11 +1,10 @@
 
-
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import csv
 import os
 
 app = Flask(__name__)
-# Use environment variable for secret key
+# Use environment variable for security; fallback key if not set
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "fallback_secret_key")
 
 STUDENT_FILE = "students.csv"
@@ -23,14 +22,14 @@ def home():
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
     if request.method == "POST":
-        email = request.form["email"]
-        password = request.form["password"]
+        email = request.form.get("email")
+        password = request.form.get("password")
 
         if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
             session["admin"] = True
             return redirect(url_for("admin_dashboard"))
         else:
-            flash("Invalid login details")
+            flash("Invalid login credentials")
 
     return render_template("login.html")
 
@@ -44,6 +43,7 @@ def admin_logout():
 @app.route("/admin/dashboard")
 def admin_dashboard():
     if not session.get("admin"):
+        flash("Please log in as admin")
         return redirect(url_for("admin_login"))
     return render_template("admin_dashboard.html")
 
@@ -51,6 +51,7 @@ def admin_dashboard():
 @app.route("/admin/students")
 def view_students():
     if not session.get("admin"):
+        flash("Access denied")
         return redirect(url_for("admin_login"))
 
     students = []
@@ -70,10 +71,9 @@ def register():
         courses = request.form.getlist("courses")
 
         if not name or not email or not courses:
-            flash("Please fill all fields")
+            flash("Please fill all required fields and select at least one course")
             return redirect(url_for("home"))
 
-        # Store as comma-separated if multiple courses
         courses_str = ", ".join(courses)
 
         with open(STUDENT_FILE, "a", newline="", encoding="utf-8") as f:
