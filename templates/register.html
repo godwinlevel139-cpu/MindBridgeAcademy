@@ -1,63 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student Registration - Mind Bridge Academy</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+<h2>Student Registration</h2>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Mind Bridge Logo">
-        </a>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
-        </ul>
-    </div>
-</nav>
+<form method="POST">
+  Name:<br><input name="name" required><br><br>
+  Email:<br><input name="email" required><br><br>
 
-<!-- Registration Form -->
-<div class="container" style="padding: 30px;">
-    <h2>Student Registration Form</h2>
-    <form method="POST" action="/register">
-        <label for="name">Full Name</label>
-        <input type="text" name="name" id="name" placeholder="John Doe" required>
+  <h3>Select Courses</h3>
+  {% for course, price in prices.items() %}
+    <input type="checkbox" name="courses" value="{{ course }}">
+    {{ course }} (${{ price }})<br>
+  {% endfor %}
 
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="example@email.com" required>
-
-        <label for="courses">Select Course(s)</label>
-        <select name="courses" id="courses" multiple required>
-            <option value="AI">AI</option>
-            <option value="Digital Marketing">Digital Marketing</option>
-            <option value="Mathematics">Mathematics</option>
-            <option value="English">English</option>
-            <option value="Chemistry">Chemistry</option>
-            <option value="Biology">Biology</option>
-            <option value="Physics">Physics</option>
-            <option value="Special Education - Autism">Special Education - Autism</option>
-            <option value="Special Education - Down Syndrome">Special Education - Down Syndrome</option>
-            <option value="Academic Counselling - Special Needs">Academic Counselling - Special Needs</option>
-            <option value="Academic Counselling - Student Behaviour & Performance">Academic Counselling - Student Behaviour & Performance</option>
-            <option value="Academic Counselling - General">Academic Counselling - General</option>
-        </select>
-
-        <label for="payment">Payment Amount (₦)</label>
-        <input type="number" name="payment" id="payment" placeholder="e.g. 150000" required>
-
-        <button type="submit" class="btn btn-primary">Submit Registration</button>
-    </form>
-</div>
-
-<!-- Footer -->
-<footer>
-    &copy; 2026 Mind Bridge Academy. All rights reserved.
-</footer>
-
-<script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+  <br><button type="submit">Register</button>
+</form>
