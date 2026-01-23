@@ -1,42 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Mind Bridge Academy</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>MindBridge Academy - Home</title>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="/">
-            <img src="{{ url_for('static', filename='logo.png') }}" class="logo" alt="Mind Bridge Logo">
-        </a>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
-                <li class="nav-item"><a class="nav-link" href="/admin">Admin</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<h1>Welcome to MindBridge Academy</h1>
 
-<!-- Main content -->
-<div class="container" style="padding: 30px;">
-    <h1>Welcome to Mind Bridge Academy</h1>
-    <p>Your learning journey starts here. Register, select courses, and access resources.</p>
+{% if session.get('admin') %}
+    <p><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></p>
+    <p><a href="{{ url_for('view_students') }}">View Registered Students</a></p>
+    <p><a href="{{ url_for('admin_logout') }}">Logout</a></p>
+{% else %}
+    <p><a href="{{ url_for('admin_login') }}">Admin Login</a></p>
+{% endif %}
 
-    <a href="/register" class="btn btn-primary">Register as Student</a>
-    <a href="/students" class="btn btn-success">View Registered Students</a>
-</div>
+<h2>Register as a Student</h2>
+<form action="{{ url_for('register') }}" method="post">
+    <label>Name:</label>
+    <input type="text" name="name" required><br><br>
 
-<!-- Footer -->
-<footer>
-    &copy; 2026 Mind Bridge Academy. All rights reserved.
-</footer>
+    <label>Email:</label>
+    <input type="email" name="email" required><br><br>
 
-<script src="{{ url_for('static', filename='script.js') }}"></script>
+    <label>Select Courses:</label><br>
+    <input type="checkbox" name="courses" value="Artificial Intelligence (AI)"> AI<br>
+    <input type="checkbox" name="courses" value="Digital Marketing"> Digital Marketing<br>
+    <input type="checkbox" name="courses" value="Mathematics"> Mathematics<br>
+    <input type="checkbox" name="courses" value="English"> English<br>
+    <input type="checkbox" name="courses" value="Chemistry"> Chemistry<br>
+    <input type="checkbox" name="courses" value="Biology"> Biology<br>
+    <input type="checkbox" name="courses" value="Physics"> Physics<br>
+    <input type="checkbox" name="courses" value="Special Education - Autism"> Special Education (Autism)<br>
+    <input type="checkbox" name="courses" value="Special Education - Down Syndrome"> Special Education (Down Syndrome)<br>
+    <input type="checkbox" name="courses" value="Counselling - Special Needs"> Counselling (Special Needs)<br>
+    <input type="checkbox" name="courses" value="Counselling - Student Behaviour and Performance"> Counselling (Behaviour & Performance)<br>
+    <input type="checkbox" name="courses" value="Counselling - General"> Counselling (General)<br><br>
+
+    <button type="submit">Register</button>
+</form>
+
+<!-- Flash messages -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul style="color: red;">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 </body>
 </html>
