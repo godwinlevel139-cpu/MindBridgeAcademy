@@ -1,14 +1,87 @@
-<h2>Student Registration</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+        }
+        .container {
+            max-width: 700px;
+            background: white;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #1e3a8a;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        .courses {
+            margin-top: 15px;
+        }
+        .courses label {
+            font-weight: normal;
+            display: block;
+        }
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1d4ed8;
+        }
+        .price {
+            color: #16a34a;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
 
-<form method="POST">
-  Name:<br><input name="name" required><br><br>
-  Email:<br><input name="email" required><br><br>
+<div class="container">
+    <h2>Student Enrollment Form</h2>
 
-  <h3>Select Courses</h3>
-  {% for course, price in prices.items() %}
-    <input type="checkbox" name="courses" value="{{ course }}">
-    {{ course }} (${{ price }})<br>
-  {% endfor %}
+    <form method="post">
+        <label>Full Name</label>
+        <input type="text" name="name" required>
 
-  <br><button type="submit">Register</button>
-</form>
+        <label>Email Address</label>
+        <input type="email" name="email" required>
+
+        <label>Select Courses</label>
+        <div class="courses">
+            {% for course, price in prices.items() %}
+                <label>
+                    <input type="checkbox" name="courses" value="{{ course }}">
+                    {{ course }} — <span class="price">${{ price }}</span>
+                </label>
+            {% endfor %}
+        </div>
+
+        <button type="submit">Proceed to Payment</button>
+    </form>
+</div>
+
+</body>
+</html>
