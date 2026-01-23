@@ -1,55 +1,75 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MindBridge Academy - Home</title>
+    <title>MindBridge Academy</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f9fafb;
+        }
+        header {
+            background: #1e3a8a;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header img {
+            height: 50px;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+        .hero {
+            background: linear-gradient(
+                rgba(30,58,138,0.8),
+                rgba(30,58,138,0.8)
+            ), url("/static/images/students.jpg");
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 40px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        .hero a {
+            background: #2563eb;
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Welcome to MindBridge Academy</h1>
+<header>
+    <img src="/static/images/logo.png" alt="MindBridge Academy">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/admin/login">Admin</a>
+    </nav>
+</header>
 
-{% if session.get('admin') %}
-    <p><a href="{{ url_for('admin_dashboard') }}">Admin Dashboard</a></p>
-    <p><a href="{{ url_for('view_students') }}">View Registered Students</a></p>
-    <p><a href="{{ url_for('admin_logout') }}">Logout</a></p>
-{% else %}
-    <p><a href="{{ url_for('admin_login') }}">Admin Login</a></p>
-{% endif %}
-
-<h2>Register as a Student</h2>
-<form action="{{ url_for('register') }}" method="post">
-    <label>Name:</label>
-    <input type="text" name="name" required><br><br>
-
-    <label>Email:</label>
-    <input type="email" name="email" required><br><br>
-
-    <label>Select Courses:</label><br>
-    <input type="checkbox" name="courses" value="Artificial Intelligence (AI)"> AI<br>
-    <input type="checkbox" name="courses" value="Digital Marketing"> Digital Marketing<br>
-    <input type="checkbox" name="courses" value="Mathematics"> Mathematics<br>
-    <input type="checkbox" name="courses" value="English"> English<br>
-    <input type="checkbox" name="courses" value="Chemistry"> Chemistry<br>
-    <input type="checkbox" name="courses" value="Biology"> Biology<br>
-    <input type="checkbox" name="courses" value="Physics"> Physics<br>
-    <input type="checkbox" name="courses" value="Special Education - Autism"> Special Education (Autism)<br>
-    <input type="checkbox" name="courses" value="Special Education - Down Syndrome"> Special Education (Down Syndrome)<br>
-    <input type="checkbox" name="courses" value="Counselling - Special Needs"> Counselling (Special Needs)<br>
-    <input type="checkbox" name="courses" value="Counselling - Student Behaviour and Performance"> Counselling (Behaviour & Performance)<br>
-    <input type="checkbox" name="courses" value="Counselling - General"> Counselling (General)<br><br>
-
-    <button type="submit">Register</button>
-</form>
-
-<!-- Flash messages -->
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul style="color: red;">
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
+<section class="hero">
+    <h1>Empowering Minds. Building Futures.</h1>
+    <p>Quality Education • Expert Tutors • Global Skills</p>
+    <a href="/register">Enroll Now</a>
+</section>
 
 </body>
 </html>
