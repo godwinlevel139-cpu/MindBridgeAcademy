@@ -1,24 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h2>Payment</h2>
-    <p><strong>Name:</strong> {{ student.name }}</p>
-    <p><strong>Email:</strong> {{ student.email }}</p>
-    <p><strong>Courses:</strong> {{ student.courses }}</p>
-    {% if student.special_type %}<p><strong>Special Type:</strong> {{ student.special_type }}</p>{% endif %}
-    {% if student.counselling_type %}<p><strong>Counselling Type:</strong> {{ student.counselling_type }}</p>{% endif %}
-    <p><strong>Total Fee (USD):</strong> ${{ student.fee_usd }}</p>
-    <p><strong>Payment Status:</strong> {{ student.payment_status }}</p>
+<header>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    <h1>Payment</h1>
+</header>
 
-    {% if student.payment_status == "Pending" %}
-        <a href="/pay_now/{{ student.id }}">Pay Now</a><br><br>
-    {% else %}
-        <p>Payment Completed ✅</p>
-    {% endif %}
+<div style="max-width:400px; margin:50px auto; text-align:center;">
+    <p>Email: {{ email }}</p>
+    <p>Total Fee: ${{ total }}</p>
 
-    <a href="/">Back to Home</a>
+    <form action="{{ url_for('pay') }}" method="POST">
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="amount" value="{{ total }}">
+        <button type="submit" class="button">Pay Now</button>
+    </form>
+</div>
 </body>
 </html>
+
+
