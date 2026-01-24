@@ -2,65 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Admin Dashboard | MindBridge Academy</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background: #1e3a8a;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .container {
-            padding: 30px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        a.button {
-            display: inline-block;
-            padding: 12px 18px;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        a.button:hover {
-            background: #1d4ed8;
-        }
-    </style>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
 <header>
-    <h1>MindBridge Academy – Admin Dashboard</h1>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('admin_logout') }}" class="button">Logout</a>
 </header>
 
-<div class="container">
-    <div class="card">
-        <h2>📊 Overview</h2>
-        <p><strong>Total Registered Students:</strong> {{ students }}</p>
-        <p><strong>Total Revenue:</strong> ${{ revenue }}</p>
+<main>
+    <div style="text-align:center; margin:20px;">
+        <p>Total Students: {{ students|length }}</p>
+        <p>Total Revenue: ${{ revenue }}</p>
+        <a href="{{ url_for('export_students') }}" class="button">Download CSV</a>
     </div>
-
-    <div class="card">
-        <h2>👨‍🎓 Student Management</h2>
-        <a href="{{ url_for('view_students') }}" class="button">View Registered Students</a>
-    </div>
-
-    <div class="card">
-        <a href="{{ url_for('admin_logout') }}" class="button" style="background:#dc2626;">Logout</a>
-    </div>
-</div>
-
+    <table>
+        <tr>
+            <th>ID</th><th>Name</th><th>Email</th><th>Courses</th><th>Total Fee</th><th>Paid</th>
+        </tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.email }}</td>
+            <td>{{ s.courses }}</td>
+            <td>{{ s.total_fee }}</td>
+            <td>{{ 'Yes' if s.payment_done else 'No' }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</main>
 </body>
 </html>
+
