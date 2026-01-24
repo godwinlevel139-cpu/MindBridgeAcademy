@@ -1,75 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>MindBridge Academy</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f9fafb;
-        }
-        header {
-            background: #1e3a8a;
-            color: white;
-            padding: 15px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        header img {
-            height: 50px;
-        }
-        header a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
-        }
-        .hero {
-            background: linear-gradient(
-                rgba(30,58,138,0.8),
-                rgba(30,58,138,0.8)
-            ), url("/static/images/students.jpg");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 100px 40px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-        .hero p {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-        .hero a {
-            background: #2563eb;
-            padding: 15px 25px;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 18px;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-
 <header>
-    <img src="/static/images/logo.png" alt="MindBridge Academy">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/register">Register</a>
-        <a href="/admin/login">Admin</a>
-    </nav>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    <h1>MindBridge Academy</h1>
+    <div>
+        <a href="{{ url_for('register') }}" class="button">Register</a>
+        <a href="{{ url_for('admin_login') }}" class="button">Admin Login</a>
+    </div>
 </header>
 
 <section class="hero">
-    <h1>Empowering Minds. Building Futures.</h1>
-    <p>Quality Education • Expert Tutors • Global Skills</p>
-    <a href="/register">Enroll Now</a>
+    <h2>Welcome to MindBridge Academy</h2>
 </section>
 
+<section>
+    <div style="text-align:center; margin:30px;">
+        <p>Professional courses in AI, Digital Marketing, Sciences, and Counselling. Learn, Grow & Excel!</p>
+    </div>
+</section>
 </body>
 </html>
+
