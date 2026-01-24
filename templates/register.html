@@ -1,87 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Student Registration</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            margin: 0;
-        }
-        .container {
-            max-width: 700px;
-            background: white;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #1e3a8a;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-        }
-        .courses {
-            margin-top: 15px;
-        }
-        .courses label {
-            font-weight: normal;
-            display: block;
-        }
-        button {
-            width: 100%;
-            margin-top: 25px;
-            padding: 14px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            font-size: 16px;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #1d4ed8;
-        }
-        .price {
-            color: #16a34a;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<header>
+    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
+    <h1>Register as Student</h1>
+</header>
 
-<div class="container">
-    <h2>Student Enrollment Form</h2>
+<form method="POST">
+    <label>Name</label>
+    <input type="text" name="name" required>
 
-    <form method="post">
-        <label>Full Name</label>
-        <input type="text" name="name" required>
+    <label>Email</label>
+    <input type="email" name="email" required>
 
-        <label>Email Address</label>
-        <input type="email" name="email" required>
-
-        <label>Select Courses</label>
-        <div class="courses">
-            {% for course, price in prices.items() %}
-                <label>
-                    <input type="checkbox" name="courses" value="{{ course }}">
-                    {{ course }} — <span class="price">${{ price }}</span>
-                </label>
-            {% endfor %}
+    <label>Courses</label>
+    {% for course, price in prices.items() %}
+        <div>
+            <input type="checkbox" name="courses" value="{{ course }}">
+            {{ course }} (${{ price }})
         </div>
+    {% endfor %}
 
-        <button type="submit">Proceed to Payment</button>
-    </form>
-</div>
-
+    <button type="submit" class="button">Proceed to Payment</button>
+</form>
 </body>
 </html>
