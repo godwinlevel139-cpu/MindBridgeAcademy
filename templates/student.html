@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Student Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
-    <h1>Student Login</h1>
-</header>
 
-<main>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flash">
-            {% for msg in messages %}
-                <li>{{ msg }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
+<div class="container">
 
-    <form method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <button type="submit">Login</button>
-    </form>
-</main>
+<h2>Registered Students</h2>
+
+<table>
+
+{% for row in students %}
+<tr>
+{% for cell in row %}
+<td>{{cell}}</td>
+{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
 </body>
 </html>
-
