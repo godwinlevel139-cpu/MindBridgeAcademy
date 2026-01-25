@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Student Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
-    <h1>Register as Student</h1>
-</header>
+
+<div class="container">
+<h2>Student Registration</h2>
 
 <form method="POST">
-    <label>Name</label>
-    <input type="text" name="name" required>
 
-    <label>Email</label>
-    <input type="email" name="email" required>
+<input name="name" placeholder="Full Name" required>
+<input name="email" placeholder="Email" required>
 
-    <label>Courses</label>
-    {% for course, price in prices.items() %}
-        <div>
-            <input type="checkbox" name="courses" value="{{ course }}">
-            {{ course }} (${{ price }})
-        </div>
-    {% endfor %}
+<h4>Select Courses</h4>
 
-    <button type="submit" class="button">Proceed to Payment</button>
+{% for course,price in prices.items() %}
+<label>
+<input type="checkbox" name="courses" value="{{course}}">
+{{course}} (${{price}})
+</label><br>
+{% endfor %}
+
+<br>
+<button class="btn">Proceed to Payment</button>
+
 </form>
+</div>
+
 </body>
 </html>
+
+
