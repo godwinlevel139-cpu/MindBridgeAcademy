@@ -1,104 +1,92 @@
-/* ============ General ============ */
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background: #f8f9fa;
-    color: #333;
+    background:#f4f7fb;
 }
 
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-/* ============ Header ============ */
 header {
-    background: #2c3e50;
-    color: #fff;
-    padding: 15px 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    background:#0a2a66;
+    color:white;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-header img.logo {
-    height: 60px;
+header img {
+    height:50px;
 }
 
-header h1 {
-    font-size: 24px;
+nav a {
+    color:white;
+    margin-left:20px;
+    text-decoration:none;
+    font-weight:600;
 }
 
-/* ============ Buttons ============ */
-.button {
-    background: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.button:hover {
-    background: #2980b9;
-}
-
-/* ============ Hero Section ============ */
 .hero {
-    background: url('/static/images/students.jpg') center/cover no-repeat;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    text-shadow: 1px 1px 5px #000;
+    background:url("/static/images/students.jpg") center/cover no-repeat;
+    height:80vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    text-align:center;
 }
 
-.hero h2 {
-    font-size: 48px;
+.hero h1 {
+    font-size:50px;
+    margin-bottom:10px;
 }
 
-/* ============ Form Styling ============ */
-form {
-    max-width: 500px;
-    margin: 30px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+.btn {
+    background:#ff9f1c;
+    padding:12px 25px;
+    border:none;
+    color:white;
+    font-size:18px;
+    border-radius:6px;
+    cursor:pointer;
 }
 
-form input, form select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+.container {
+    max-width:1000px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
 
-form button {
-    width: 100%;
-    margin-top: 15px;
+input, select {
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
 }
 
-/* ============ Tables ============ */
+.dashboard {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+}
+
+.card {
+    background:#0a2a66;
+    color:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+}
+
 table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    width:100%;
+    border-collapse:collapse;
 }
 
 th, td {
-    padding: 10px;
-    text-align: center;
+    padding:10px;
+    border-bottom:1px solid #ddd;
 }
 
-th {
-    background: #2c3e50;
-    color: #fff;
-}
