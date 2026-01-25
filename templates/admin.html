@@ -1,40 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header>
-    <img src="{{ url_for('static', filename='images/students.jpg/logo.png') }}" class="logo">
-    <h1>Admin Dashboard</h1>
-    <a href="{{ url_for('admin_logout') }}" class="button">Logout</a>
-</header>
 
-<main>
-    <div style="text-align:center; margin:20px;">
-        <p>Total Students: {{ students|length }}</p>
-        <p>Total Revenue: ${{ revenue }}</p>
-        <a href="{{ url_for('export_students') }}" class="button">Download CSV</a>
-    </div>
-    <table>
-        <tr>
-            <th>ID</th><th>Name</th><th>Email</th><th>Courses</th><th>Total Fee</th><th>Paid</th>
-        </tr>
-        {% for s in students %}
-        <tr>
-            <td>{{ s.id }}</td>
-            <td>{{ s.name }}</td>
-            <td>{{ s.email }}</td>
-            <td>{{ s.courses }}</td>
-            <td>{{ s.total_fee }}</td>
-            <td>{{ 'Yes' if s.payment_done else 'No' }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</main>
+<div class="container">
+
+<h2>Admin Dashboard</h2>
+
+<div class="dashboard">
+
+<div class="card">
+<h3>Total Students</h3>
+<h1>{{student_count}}</h1>
+</div>
+
+<div class="card">
+<h3>Total Revenue</h3>
+<h1>${{revenue}}</h1>
+</div>
+
+</div>
+
+<br>
+
+<a href="/admin/students"><button class="btn">View Students</button></a>
+
+</div>
+
 </body>
 </html>
-
-
