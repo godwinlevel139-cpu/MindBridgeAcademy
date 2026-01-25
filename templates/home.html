@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>MindBridge Academy</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+
 <header>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
-    <h1>MindBridge Academy</h1>
-    <div>
-        <a href="{{ url_for('register') }}" class="button">Register</a>
-        <a href="{{ url_for('admin_login') }}" class="button">Admin Login</a>
-    </div>
+    <img src="/static/images/logo.png">
+    <nav>
+        <a href="/">Home</a>
+        <a href="/register">Register</a>
+        <a href="/admin/login">Admin</a>
+    </nav>
 </header>
 
-<section class="hero">
-    <h2>Welcome to MindBridge Academy</h2>
-</section>
-
-<section>
-    <div style="text-align:center; margin:30px;">
-        <p>Professional courses in AI, Digital Marketing, Sciences, and Counselling. Learn, Grow & Excel!</p>
+<div class="hero">
+    <div>
+        <h1>Welcome to MindBridge Academy</h1>
+        <p>Building future innovators</p>
+        <a href="/register"><button class="btn">Register Now</button></a>
     </div>
-</section>
+</div>
+
 </body>
 </html>
+
 
