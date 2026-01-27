@@ -1,33 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-
-<div class="container">
+{% extends "base.html" %}
+{% block content %}
 
 <h2>Admin Dashboard</h2>
 
-<div class="dashboard">
+<p>Total Revenue: ₦{{ revenue }}</p>
 
-<div class="card">
-<h3>Total Students</h3>
-<h1>{{student_count}}</h1>
-</div>
+<canvas id="chart"></canvas>
 
-<div class="card">
-<h3>Total Revenue</h3>
-<h1>${{revenue}}</h1>
-</div>
+<script>
+new Chart(document.getElementById("chart"),{
+type:"bar",
+data:{
+labels:["Paid","Unpaid"],
+datasets:[{data:[{{ paid }},{{ unpaid }}]}]
+}
+})
+</script>
 
-</div>
+<table class="table mt-4">
 
-<br>
+<tr>
+<th>Name</th><th>Email</th><th>Status</th>
+</tr>
 
-<a href="/admin/students"><button class="btn">View Students</button></a>
+{% for s in students %}
+<tr>
+<td>{{ s.name }}</td>
+<td>{{ s.email }}</td>
+<td>{{ "Paid" if s.paid else "Unpaid" }}</td>
+</tr>
+{% endfor %}
 
-</div>
+</table>
 
-</body>
-</html>
+{% endblock %}
