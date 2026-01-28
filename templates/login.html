@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-<header>
-    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo">
-    <h1>Admin Login</h1>
-</header>
-
-<form method="POST">
-    <label>Email</label>
-    <input type="email" name="email" required>
-
-    <label>Password</label>
-    <input type="password" name="password" required>
-
-    <button type="submit" class="button">Login</button>
+{% extends "base.html" %}
+{% block content %}
+<h2>Student Login</h2>
+<form method="POST" action="/login">
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <button class="btn btn-primary">Login</button>
 </form>
-</body>
-</html>
+{% endblock %}
+
