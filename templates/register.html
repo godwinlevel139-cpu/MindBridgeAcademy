@@ -1,32 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-
-<div class="container">
+{% extends "base.html" %}
+{% block content %}
 <h2>Student Registration</h2>
-
-<form method="POST">
-
-<input name="name" placeholder="Full Name" required>
-<input name="email" placeholder="Email" required>
-
-<h4>Select Courses</h4>
-
-{% for course,price in prices.items() %}
-<label>
-<input type="checkbox" name="courses" value="{{course}}">
-{{course}} (${{price}})
-</label><br>
-{% endfor %}
-
-<br>
-<button class="btn">Proceed to Payment</button>
-
+<form method="POST" action="/register">
+    <div class="mb-3">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Password</label>
+        <input type="password" name="password" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label>Courses (select multiple with Ctrl/Cmd)</label>
+        <select name="courses" class="form-select" multiple required>
+            <option value="AI">AI</option>
+            <option value="Digital Marketing">Digital Marketing</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="English">English</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="Special Education">Special Education</option>
+            <option value="Academic Counselling">Academic Counselling</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Total Fee</label>
+        <input type="number" name="fee" class="form-control" required>
+    </div>
+    <button class="btn btn-success">Register</button>
 </form>
-</div>
+{% endblock %}
 
-</body>
-</html>
