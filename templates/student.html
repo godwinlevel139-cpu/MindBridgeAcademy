@@ -1,27 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+<h1>Welcome {{ student.name }}</h1>
 
-<div class="container">
+<p>Courses: {{ student.courses }}</p>
+<p>Fee: ₦{{ student.total_fee }}</p>
 
-<h2>Registered Students</h2>
+{% if student.paid %}
+<h3>Payment Complete ✅</h3>
+{% else %}
+<a href="/pay/{{ student.id }}">Pay Now</a>
+{% endif %}
 
-<table>
+<a href="/logout">Logout</a>
 
-{% for row in students %}
-<tr>
-{% for cell in row %}
-<td>{{cell}}</td>
-{% endfor %}
-</tr>
-{% endfor %}
-
-</table>
-
-</div>
-
-</body>
-</html>
