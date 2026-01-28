@@ -4,19 +4,22 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import requests
 
+# ================= FLASK APP =================
 app = Flask(__name__)
-app.secret_key = "super_secret_key"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "super_secret_key")
 
-# DATABASE (PostgreSQL or SQLite fallback)
-DATABASE_URL = os.environ.get("DATABASE_URL","sqlite:///school.db")
-
+# ================= DATABASE =================
+DATABASE_URL = os.environ.get("DATABASE_URL", "sqlite:///school.db")
 app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 db = SQLAlchemy(app)
 
-# ================= MODELS =================
+# ================= ADMIN =================
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@mindbridgeacademy.com")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
+PAYSTACK_SECRET = os.environ.get("PAYSTACK_SECRET", "")
 
+# ================= MODELS =================
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
@@ -42,62 +45,55 @@ with app.app_context():
     db.create_all()
 
 # ================= HOME =================
-
 @app.route("/")
 def home():
     return render_template("home.html")
 
 # ================= STUDENT REGISTER =================
-
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=["GET","POST"])
 def register():
-    name = request.form["name"]
-    email = request.form["email"]
-    password = generate_password_hash(request.form["password"])
-    courses = request.form["courses"]
-    total_fee = float(request.form["fee"])
+    if request.method == "POST":
+        name = request.form["name"]
+        email = request.form["email"]
+        password = generate_password_hash(request.form["password"])
+        courses = ", ".join(request.form.getlist("courses"))
+        total_fee = sum(float(fee) for fee in request.form.getlist("fee"))
 
-    student = Student(
-        name=name,
-        email=email,
-        password=password,
-        courses=courses,
-        total_fee=total_fee
-    )
+        student = Student(
+            name=name,
+            email=email,
+            password=password,
+            courses=courses,
+            total_fee=total_fee
+        )
+        db.session.add(student)
+        db.session.commit()
+        flash("Registration successful. Please login.")
+        return redirect(url_for("student_login"))
 
-    db.session.add(student)
-    db.session.commit()
+    return render_template("register.html")
 
-    flash("Registration successful")
-    return redirect("/login")
-
-# ================= LOGIN =================
-
+# ================= STUDENT LOGIN =================
 @app.route("/login", methods=["GET","POST"])
-def login():
-    if request.method=="POST":
+def student_login():
+    if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
 
         student = Student.query.filter_by(email=email).first()
-
-        if student and check_password_hash(student.password,password):
-            session["student_id"]=student.id
-            return redirect("/student/dashboard")
-
+        if student and check_password_hash(student.password, password):
+            session["student_id"] = student.id
+            return redirect(url_for("student_dashboard"))
         flash("Invalid login")
-
     return render_template("login.html")
 
 # ================= STUDENT DASHBOARD =================
-
 @app.route("/student/dashboard")
 def student_dashboard():
     if "student_id" not in session:
-        return redirect("/login")
+        return redirect(url_for("student_login"))
 
     student = Student.query.get(session["student_id"])
-
     attendance = Attendance.query.filter_by(student_id=student.id).all()
     results = Result.query.filter_by(student_id=student.id).all()
 
@@ -108,67 +104,57 @@ def student_dashboard():
         results=results
     )
 
-# ================= PAYSTACK PAYMENT =================
-
-PAYSTACK_SECRET = os.environ.get("PAYSTACK_SECRET","")
-
+# ================= PAYMENT =================
 @app.route("/pay")
 def pay():
+    if "student_id" not in session:
+        return redirect(url_for("student_login"))
+
     student = Student.query.get(session["student_id"])
+    headers = {"Authorization": f"Bearer {PAYSTACK_SECRET}", "Content-Type": "application/json"}
+    data = {"email": student.email, "amount": int(student.total_fee*100)}
 
-    headers = {
-        "Authorization": f"Bearer {PAYSTACK_SECRET}",
-        "Content-Type": "application/json"
-    }
-
-    data = {
-        "email": student.email,
-        "amount": int(student.total_fee*100)
-    }
-
-    res = requests.post(
-        "https://api.paystack.co/transaction/initialize",
-        json=data,
-        headers=headers
-    ).json()
-
+    res = requests.post("https://api.paystack.co/transaction/initialize", json=data, headers=headers).json()
     return redirect(res["data"]["authorization_url"])
 
 @app.route("/payment-success")
 def payment_success():
+    if "student_id" not in session:
+        return redirect(url_for("student_login"))
     student = Student.query.get(session["student_id"])
-    student.paid=True
+    student.paid = True
     db.session.commit()
-    return redirect("/student/dashboard")
+    flash("Payment successful!")
+    return redirect(url_for("student_dashboard"))
 
-# ================= ADMIN =================
+# ================= ADMIN LOGIN =================
+@app.route("/admin/login", methods=["GET","POST"])
+def admin_login():
+    if request.method == "POST":
+        email = request.form["email"]
+        password = request.form["password"]
+        if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+            session["admin"] = True
+            return redirect(url_for("admin_dashboard"))
+        flash("Invalid login")
+    return render_template("admin_login.html")
 
+# ================= ADMIN DASHBOARD =================
 @app.route("/admin/dashboard")
 def admin_dashboard():
-    students = Student.query.all()
-    revenue = sum(s.total_fee for s in students if s.paid)
+    if "admin" not in session:
+        return redirect(url_for("admin_login"))
 
+    students = Student.query.all()
     paid = len([s for s in students if s.paid])
     unpaid = len(students) - paid
 
-    return render_template(
-        "admin_dashboard.html",
-        students=students,
-        revenue=revenue,
-        paid=paid,
-        unpaid=unpaid
-    )
-
-@app.route("/chart-data")
-def chart_data():
-    students = Student.query.all()
-    paid = len([s for s in students if s.paid])
-    unpaid = len(students)-paid
-
-    return jsonify({"paid":paid,"unpaid":unpaid})
+    return render_template("admin_dashboard.html",
+                           students=students,
+                           paid=paid,
+                           unpaid=unpaid)
 
 # ================= ATTENDANCE =================
-
 @app.route("/attendance", methods=["GET","POST"])
 def attendance():
     if request.method=="POST":
@@ -176,45 +162,37 @@ def attendance():
         date = request.form["date"]
         status = request.form["status"]
 
-        a = Attendance(
-            student_id=student_id,
-            date=date,
-            status=status
-        )
+        a = Attendance(student_id=student_id, date=date, status=status)
         db.session.add(a)
         db.session.commit()
+        flash("Attendance added.")
 
     records = Attendance.query.all()
     return render_template("attendance.html", records=records)
 
 # ================= RESULTS =================
-
 @app.route("/results", methods=["GET","POST"])
 def results():
     if request.method=="POST":
         student_id = request.form["student_id"]
         subject = request.form["subject"]
-        score = request.form["score"]
+        score = float(request.form["score"])
 
-        r = Result(
-            student_id=student_id,
-            subject=subject,
-            score=score
-        )
+        r = Result(student_id=student_id, subject=subject, score=score)
         db.session.add(r)
         db.session.commit()
+        flash("Result added.")
 
-    results = Result.query.all()
-    return render_template("results.html", results=results)
+    all_results = Result.query.all()
+    return render_template("results.html", results=all_results)
 
 # ================= LOGOUT =================
-
 @app.route("/logout")
 def logout():
     session.clear()
     return redirect("/")
 
 # ================= RUN =================
-
 if __name__=="__main__":
     app.run(debug=True)
+
