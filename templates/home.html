@@ -1,29 +1,75 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>MindBridge Academy</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
+{% extends "base.html" %}
 
-<header>
-    <img src="/static/images/logo.png">
-    <nav>
-        <a href="/">Home</a>
-        <a href="/register">Register</a>
-        <a href="/admin/login">Admin</a>
-    </nav>
-</header>
+{% block content %}
 
-<div class="hero">
-    <div>
-        <h1>Welcome to MindBridge Academy</h1>
-        <p>Building future innovators</p>
-        <a href="/register"><button class="btn">Register Now</button></a>
+<div class="container py-5">
+
+    <div class="row align-items-center g-4">
+
+        <!-- TEXT SIDE -->
+        <div class="col-md-6">
+
+            <h1 class="fw-bold mb-3">
+                Smart School Management Platform
+            </h1>
+
+            <p class="lead text-muted">
+                Manage students, payments, attendance, results and communication 
+                all in one powerful system.
+            </p>
+
+            <div class="mt-4">
+                <a href="/login" class="btn btn-primary btn-lg me-2">
+                    Login
+                </a>
+
+                <a href="/register" class="btn btn-outline-secondary btn-lg">
+                    Register
+                </a>
+            </div>
+
+        </div>
+
+        <!-- IMAGE SIDE -->
+        <div class="col-md-6 text-center">
+
+            <img 
+                src="{{ url_for('static', filename='images/students.jpg') }}" 
+                alt="Students"
+                class="img-fluid rounded-4 shadow-lg"
+                style="max-height:420px; object-fit:cover;"
+            >
+
+        </div>
+
     </div>
+
+    <!-- FEATURES SECTION -->
+    <div class="row text-center mt-5">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 p-4 h-100">
+                <h4>📚 Student Management</h4>
+                <p class="text-muted">Register students, track profiles and performance.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 p-4 h-100">
+                <h4>💳 Secure Payments</h4>
+                <p class="text-muted">Collect school fees online with Paystack.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-sm border-0 p-4 h-100">
+                <h4>📊 Smart Dashboard</h4>
+                <p class="text-muted">View charts, revenue and attendance stats.</p>
+            </div>
+        </div>
+
+    </div>
+
 </div>
 
-</body>
-</html>
-
-
+{% endblock %}
