@@ -42,6 +42,7 @@ class Result(db.Model):
     score = db.Column(db.Float)
 
 with app.app_context():
+    db.drop_all()
     db.create_all()
 
 # ================= HOME =================
@@ -133,9 +134,11 @@ def admin_login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
+
         if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
             session["admin"] = True
             return redirect(url_for("admin_dashboard"))
+
         flash("Invalid login")
     return render_template("admin_login.html")
 
@@ -149,10 +152,20 @@ def admin_dashboard():
     paid = len([s for s in students if s.paid])
     unpaid = len(students) - paid
 
-    return render_template("admin_dashboard.html",
-                           students=students,
-                           paid=paid,
-                           unpaid=unpaid)
+    # Example: prepare data for charts
+    chart_data = {
+        "labels": ["Paid", "Unpaid"],
+        "values": [paid, unpaid]
+    }
+
+    return render_template(
+        "admin_dashboard.html",
+        students=students,
+        chart_data=chart_data,
+        paid=paid,
+        unpaid=unpaid
+    )
+
 
 # ================= ATTENDANCE =================
 @app.route("/attendance", methods=["GET","POST"])
