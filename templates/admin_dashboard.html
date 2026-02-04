@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+
+<a href="/admin/logout">Logout</a>
+
+<h3>Statistics</h3>
+<p>Paid: {{ chart_data.values[0] }}</p>
+<p>Unpaid: {{ chart_data.values[1] }}</p>
+
+<h3>Students</h3>
+<table border="1" cellpadding="5">
+<tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Paid</th>
+</tr>
+
+{% for student in students %}
+<tr>
+    <td>{{ student.id }}</td>
+    <td>{{ student.name }}</td>
+    <td>{{ student.email }}</td>
+    <td>{{ "Yes" if student.paid else "No" }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

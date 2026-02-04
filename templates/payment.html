@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="container">
+<h2>Payment</h2>
+
+<form action="/pay" method="POST">
+<input type="hidden" name="email" value="{{email}}">
+<input type="hidden" name="amount" value="{{total}}">
+
+<p>Total Fee: <strong>${{total}}</strong></p>
+
+<button class="btn">Pay Now</button>
+</form>
+
+</div>
+</body>
+</html>

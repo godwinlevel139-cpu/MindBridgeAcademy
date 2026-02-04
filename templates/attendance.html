@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container my-5">
+    <h3>Attendance Management</h3>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for msg in messages %}
+          <div class="alert alert-success">{{ msg }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="card p-4 mb-4">
+        <h5>Add Attendance Record</h5>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Student ID</label>
+                <input name="student_id" class="form-control" placeholder="Student ID" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input name="date" type="date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-select" required>
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                </select>
+            </div>
+            <button class="btn btn-primary">Add Attendance</button>
+        </form>
+    </div>
+
+    <div class="card p-4">
+        <h5>Attendance Records</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in records %}
+                <tr>
+                    <td>{{ a.student_id }}</td>
+                    <td>{{ a.date }}</td>
+                    <td>
+                        {% if a.status == "Present" %}
+                            <span class="badge bg-success">{{ a.status }}</span>
+                        {% else %}
+                            <span class="badge bg-danger">{{ a.status }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

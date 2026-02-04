@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Results</h3>
+
+<form method="POST">
+<input name="student_id" placeholder="Student ID">
+<input name="subject" placeholder="Subject">
+<input name="score" placeholder="Score">
+<button>Add</button>
+</form>
+
+<ul>
+{% for r in results %}
+<li>{{ r.student_id }} - {{ r.subject }} - {{ r.score }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

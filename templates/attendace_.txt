@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Attendance</h3>
+
+<form method="POST">
+<input name="student_id" placeholder="Student ID">
+<input name="date" placeholder="Date">
+<select name="status">
+<option>Present</option>
+<option>Absent</option>
+</select>
+<button>Add</button>
+</form>
+
+<ul>
+{% for a in records %}
+<li>{{ a.student_id }} - {{ a.date }} - {{ a.status }}</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

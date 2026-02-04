@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mindbridge School</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f4f4f9; color:#333; }
+        header { background:#0d47a1; color:#fff; padding:40px 20px; text-align:center; }
+        header h1 { margin:10px 0; font-size:3em; display:inline-block; vertical-align:middle; }
+        header img { height:80px; vertical-align:middle; margin-right:20px; }
+        nav { background:#1565c0; padding:10px; text-align:center; }
+        nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
+        section { padding:50px 20px; max-width:1000px; margin:auto; }
+        .cards { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+        .card { background:#fff; padding:20px; border-radius:10px; box-shadow:0 4px 8px rgba(0,0,0,0.1); width:250px; text-align:center; }
+        .card img { width:100%; border-radius:10px; height:150px; object-fit:cover; }
+        footer { background:#0d47a1; color:#fff; text-align:center; padding:20px; margin-top:50px; }
+        h2 { color:#0d47a1; }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    <h1>Mindbridge School</h1>
+    <p>Empowering students to achieve excellence</p>
+</header>
+
+<nav>
+    <a href="#about">About</a>
+    <a href="#courses">Courses</a>
+    <a href="#students">Students</a>
+    <a href="/admin/login">Admin Login</a>
+</nav>
+
+<section id="about">
+    <h2>About Mindbridge</h2>
+    <p>Mindbridge School is a premier learning institution dedicated to providing quality education and nurturing future leaders. Our mission is to equip students with knowledge, skills, and values that empower them to succeed in a dynamic world.</p>
+    <img src="{{ about_image }}" alt="School" style="width:100%; border-radius:10px; margin-top:20px;">
+</section>
+
+<section id="courses">
+    <h2>Courses Offered</h2>
+    <div class="cards">
+        {% for course, img in zip(courses, course_images) %}
+        <div class="card">
+            <img src="{{ img }}" alt="Course">
+            <h3>{{ course }}</h3>
+            <p>Comprehensive curriculum and hands-on learning to master {{ course }}.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="students">
+    <h2>Featured Students</h2>
+    <div class="cards">
+        {% for student in students %}
+        <div class="card">
+            <img src="{{ url_for('static', filename='student.jpg') }}" alt="Student">
+            <h3>{{ student.name }}</h3>
+            <p>{{ student.email }}</p>
+            <p>Paid: {{ "Yes" if student.paid else "No" }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Mindbridge School. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

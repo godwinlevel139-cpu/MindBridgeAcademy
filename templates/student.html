@@ -1,0 +1,12 @@
+<h1>Welcome {{ student.name }}</h1>
+
+<p>Courses: {{ student.courses }}</p>
+<p>Fee: ₦{{ student.total_fee }}</p>
+
+{% if student.paid %}
+<h3>Payment Complete ✅</h3>
+{% else %}
+<a href="/pay/{{ student.id }}">Pay Now</a>
+{% endif %}
+
+<a href="/logout">Logout</a>
