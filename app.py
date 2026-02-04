@@ -11,13 +11,23 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev_key_change_in_production")
 
 # Database configuration - PostgreSQL for production, SQLite for development
-if os.environ.get("DATABASE_URL"):
-    # Render provides DATABASE_URL, but we need to handle postgres:// vs postgresql://
-    database_url = os.environ.get("DATABASE_URL")
+database_url = os.environ.get("DATABASE_URL")
+
+if database_url:
+    # Render uses postgres:// but SQLAlchemy needs postgresql://
     if database_url.startswith("postgres://"):
         database_url = database_url.replace("postgres://", "postgresql://", 1)
+    
+    # Add SSL requirement for Render PostgreSQL
+    if "?" in database_url:
+        if "sslmode" not in database_url:
+            database_url = database_url + "&sslmode=require"
+    else:
+        database_url = database_url + "?sslmode=require"
+    
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url
 else:
+    # Local development
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///students.db"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -29,8 +39,8 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 db = SQLAlchemy(app)
 
 # ================= ADMIN CREDENTIALS =================
-ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@mindbridge.com")
-ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "Strongadmin123")
+ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@example.com")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "admin123")
 
 # ================= DATABASE MODELS =================
 class Student(db.Model):
@@ -276,4 +286,3 @@ def health():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
-
