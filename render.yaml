@@ -2,11 +2,12 @@ services:
   - type: web
     name: mindbridge-school
     env: python
+    runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.11.9
       - key: SECRET_KEY
         generateValue: true
       - key: ADMIN_EMAIL
@@ -18,4 +19,3 @@ databases:
   - name: mindbridge-db
     databaseName: mindbridge_school
     user: mindbridge_user
-
