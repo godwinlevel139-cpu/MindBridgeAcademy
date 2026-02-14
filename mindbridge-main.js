@@ -436,3 +436,4 @@ window.onclick = function(event) {
         event.target.classList.remove('active');
     }
 }
+
