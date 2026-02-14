@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Mindbridge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mindbridge-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="school-logo-small">M</div>
+                <h3>Student Portal</h3>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview">
+                    <span class="icon">📊</span><span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="classes">
+                    <span class="icon">🎥</span><span>My Classes</span>
+                </a>
+                <a href="#" class="nav-item" data-section="schedule">
+                    <span class="icon">📅</span><span>Class Schedule</span>
+                </a>
+                <a href="#" class="nav-item" data-section="performance">
+                    <span class="icon">📈</span><span>My Performance</span>
+                </a>
+                <a href="#" class="nav-item" data-section="assessments">
+                    <span class="icon">📝</span><span>Assessments</span>
+                </a>
+                <a href="#" class="nav-item" data-section="materials">
+                    <span class="icon">📚</span><span>Course Materials</span>
+                </a>
+                <a href="#" class="nav-item" data-section="support">
+                    <span class="icon">💬</span><span>Support & Help</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <span class="icon">⚙️</span><span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span><span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 id="pageTitle">Student Dashboard</h1>
+                    <p id="pageSubtitle">Welcome back to your learning portal</p>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary btn-small" onclick="showComplaintModal()" style="margin-right: 1rem;">
+                        📢 Report Issue
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">S</div>
+                        <div>
+                            <div class="user-name" id="userName">Loading...</div>
+                            <div class="user-role" id="userGrade">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Overview Section -->
+                <section id="overview-section" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #3B82F6, #06B6D4);">📚</div>
+                            <div class="stat-info">
+                                <h3 id="enrolledCourses">0</h3>
+                                <p>Enrolled Courses</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #10B981, #059669);">📊</div>
+                            <div class="stat-info">
+                                <h3 id="avgGrade">0%</h3>
+                                <p>Average Grade</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">✅</div>
+                            <div class="stat-info">
+                                <h3 id="attendance">0%</h3>
+                                <p>Attendance Rate</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">🎯</div>
+                            <div class="stat-info">
+                                <h3 id="completedAssessments">0</h3>
+                                <p>Completed Tasks</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="card">
+                            <h3>📅 Upcoming Classes</h3>
+                            <div id="upcomingClasses"></div>
+                        </div>
+                        <div class="card">
+                            <h3>📝 Pending Assessments</h3>
+                            <div id="pendingAssessments"></div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem;">
+                        <h3>🏆 Recent Achievements</h3>
+                        <div id="achievements"></div>
+                    </div>
+                </section>
+
+                <!-- Classes Section -->
+                <section id="classes-section" class="content-section">
+                    <div class="card">
+                        <h3>🎥 Live Classes</h3>
+                        <p style="color: var(--gray); margin-bottom: 2rem;">Join your scheduled live classes with tutors</p>
+                        
+                        <div id="liveClassesList"></div>
+                    </div>
+                </section>
+
+                <!-- Schedule Section -->
+                <section id="schedule-section" class="content-section">
+                    <div class="card">
+                        <h3>📅 My Class Schedule</h3>
+                        <p style="color: var(--gray); margin-bottom: 2rem;">View your weekly class timetable</p>
+                        
+                        <div class="filter-bar">
+                            <select id="weekFilter" class="form-control">
+                                <option value="current">Current Week</option>
+                                <option value="next">Next Week</option>
+                            </select>
+                        </div>
+
+                        <div id="weeklySchedule"></div>
+                    </div>
+                </section>
+
+                <!-- Performance Section -->
+                <section id="performance-section" class="content-section">
+                    <div class="card">
+                        <h3>📈 Academic Performance</h3>
+                        
+                        <div class="filter-bar">
+                            <select id="semesterFilter" class="form-control">
+                                <option value="current">Current Semester</option>
+                                <option value="previous">Previous Semester</option>
+                            </select>
+                        </div>
+
+                        <div id="performanceTable">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Assignments</th>
+                                        <th>Quizzes</th>
+                                        <th>Tests</th>
+                                        <th>Exams</th>
+                                        <th>Average</th>
+                                        <th>Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="performanceBody"></tbody>
+                            </table>
+                        </div>
+
+                        <div style="margin-top: 2rem; padding: 1.5rem; background: var(--gray-50); border-radius: 12px;">
+                            <h4 style="margin-bottom: 1rem;">📊 Semester Progress</h4>
+                            <div id="semesterProgress"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Assessments Section -->
+                <section id="assessments-section" class="content-section">
+                    <div class="card">
+                        <h3>📝 My Assessments</h3>
+                        
+                        <div style="display: grid; gap: 1rem; margin-bottom: 2rem;">
+                            <button class="btn btn-primary" onclick="switchAssessmentTab('pending')" id="pendingTab">
+                                Pending Assessments
+                            </button>
+                            <button class="btn btn-secondary" onclick="switchAssessmentTab('completed')" id="completedTab">
+                                Completed Assessments
+                            </button>
+                        </div>
+
+                        <div id="assessmentsContent"></div>
+                    </div>
+                </section>
+
+                <!-- Materials Section -->
+                <section id="materials-section" class="content-section">
+                    <div class="card">
+                        <h3>📚 Course Materials</h3>
+                        
+                        <div class="filter-bar">
+                            <select id="materialSubject" class="form-control">
+                                <option value="">All Subjects</option>
+                            </select>
+                            <select id="materialType" class="form-control">
+                                <option value="">All Types</option>
+                                <option value="notes">📄 Notes</option>
+                                <option value="video">🎥 Videos</option>
+                            </select>
+                        </div>
+
+                        <div id="materialsGrid" class="resources-grid"></div>
+                    </div>
+                </section>
+
+                <!-- Support Section -->
+                <section id="support-section" class="content-section">
+                    <div class="content-grid">
+                        <div class="card">
+                            <h3>📢 Report Issue / Complaint</h3>
+                            <p style="color: var(--gray); margin-bottom: 1.5rem;">Submit complaints directly to admin (confidential)</p>
+                            
+                            <form id="complaintForm">
+                                <div class="form-group">
+                                    <label>Issue Type</label>
+                                    <select id="complaintType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="tutor">Tutor Related</option>
+                                        <option value="technical">Technical Issue</option>
+                                        <option value="content">Course Content</option>
+                                        <option value="billing">Billing/Payment</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <input type="text" id="complaintSubject" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea id="complaintDesc" rows="5" style="width: 100%; padding: 0.875rem; border: 2px solid var(--border); border-radius: 12px; font-family: 'Inter', sans-serif;" required></textarea>
+                                </div>
+                                <div style="background: #FEF3C7; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                                    <small style="color: #92400E;">🔒 Your complaint is confidential. Tutors will not be notified.</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Complaint</button>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <h3>💬 Customer Service</h3>
+                            <p style="color: var(--gray); margin-bottom: 1.5rem;">Get help from our support team</p>
+                            
+                            <form id="enquiryForm">
+                                <div class="form-group">
+                                    <label>Your Question</label>
+                                    <textarea id="enquiryText" rows="4" style="width: 100%; padding: 0.875rem; border: 2px solid var(--border); border-radius: 12px; font-family: 'Inter', sans-serif;" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success" style="width: 100%;">Send to Customer Service</button>
+                            </form>
+
+                            <div style="margin-top: 2rem; padding: 1.5rem; background: var(--gray-50); border-radius: 12px;">
+                                <h4 style="margin-bottom: 0.5rem;">📞 Quick Contact</h4>
+                                <p style="margin-bottom: 0.5rem;">Email: support@mindbridge.edu</p>
+                                <p>Phone: +1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-top: 2rem;">
+                        <h3>📝 My Complaints & Enquiries</h3>
+                        <div id="complaintHistory"></div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <div class="card">
+                        <h3>⚙️ Account Settings</h3>
+                        
+                        <form id="settingsForm">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="settingName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Student ID</label>
+                                <input type="text" id="settingId" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="settingEmail" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Grade Level</label>
+                                <input type="text" id="settingGrade" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Change Password</label>
+                                <input type="password" id="settingPassword" placeholder="Enter new password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Settings</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Complaint Modal -->
+    <div class="modal" id="complaintModal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="close-modal" onclick="closeComplaintModal()">&times;</button>
+            <div class="modal-header">
+                <h2>📢 Report Issue</h2>
+                <p style="color: var(--gray);">Submit a confidential complaint to admin</p>
+            </div>
+            <form id="quickComplaintForm">
+                <div class="form-group">
+                    <label>Issue Type</label>
+                    <select required>
+                        <option value="tutor">Tutor Related</option>
+                        <option value="technical">Technical Issue</option>
+                        <option value="content">Course Content</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea rows="5" style="width: 100%; padding: 0.875rem; border: 2px solid var(--border); border-radius: 12px;" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="mindbridge-data.js"></script>
+    <script src="student-system.js"></script>
+</body>
+</html>

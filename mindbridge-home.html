@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindbridge - Premium Online School | Transform Your Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --navy: #0F172A;
+            --slate: #1E293B;
+            --blue: #3B82F6;
+            --cyan: #06B6D4;
+            --emerald: #10B981;
+            --amber: #F59E0B;
+            --rose: #F43F5E;
+            --white: #FFFFFF;
+            --gray-50: #F8FAFC;
+            --gray-100: #F1F5F9;
+            --gray-200: #E2E8F0;
+            --gray-700: #334155;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--navy);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gray-200);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        header.scrolled {
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--blue);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--blue);
+            color: var(--blue);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--blue);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-text h1 span {
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: var(--gray-200);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-buttons .btn {
+            padding: 1.125rem 2.25rem;
+            font-size: 1.05rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .badge-1 {
+            top: 10%;
+            right: -10%;
+        }
+
+        .badge-2 {
+            bottom: 15%;
+            left: -10%;
+        }
+
+        .floating-badge h4 {
+            font-size: 0.875rem;
+            color: var(--gray-700);
+            margin-bottom: 0.25rem;
+        }
+
+        .floating-badge p {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: 3rem 2rem;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .stats-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--gray-700);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 8rem 2rem;
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+            color: var(--blue);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-header h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            color: var(--navy);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-header p {
+            font-size: 1.25rem;
+            color: var(--gray-700);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s;
+            border: 1px solid var(--gray-200);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--blue);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--navy);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--gray-700);
+            line-height: 1.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 50%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-content h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            color: var(--gray-200);
+            margin-bottom: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 5rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h4 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            color: var(--gray-200);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h5 {
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .footer-section a {
+            color: var(--gray-200);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-200);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-content h2 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">M</div>
+                <span class="logo-text">Mindbridge</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#programs">Programs</a>
+                <a href="#tutors">Tutors</a>
+                <a href="#" onclick="showLoginModal(); return false;">Login</a>
+                <button class="btn btn-primary" onclick="showEnrollModal()">Enroll Now</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Transform Your <span>Future</span> Through Online Education</h1>
+                <p>World-class education in High School subjects, AI, Digital Marketing, Special Education, and more. Learn from expert tutors in live interactive sessions.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="showEnrollModal()">Start Learning Today</button>
+                    <button class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">Explore Programs</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-container">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='450' viewBox='0 0 600 450'%3E%3Crect fill='%234F46E5' width='600' height='450'/%3E%3Cg opacity='0.1'%3E%3Cpath fill='%23FFF' d='M0 0h600v450H0z'/%3E%3Ccircle fill='%2306B6D4' cx='300' cy='225' r='200'/%3E%3C/g%3E%3Ctext x='50%25' y='50%25' font-family='Inter' font-size='48' font-weight='700' fill='white' text-anchor='middle' dominant-baseline='middle'%3EOnline Learning%3C/text%3E%3C/svg%3E" alt="Online Learning Platform">
+                </div>
+                <div class="floating-badge badge-1">
+                    <h4>Expert Tutors</h4>
+                    <p>50+</p>
+                </div>
+                <div class="floating-badge badge-2" style="animation-delay: 1.5s;">
+                    <h4>Success Rate</h4>
+                    <p>98%</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <div class="stat-number">5,000+</div>
+                <div class="stat-label">Active Students</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Expert Tutors</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Courses Available</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Success Rate</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Why Choose Mindbridge</span>
+                <h2>Excellence in Online Education</h2>
+                <p>Experience the future of learning with our innovative platform designed for success</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Live Interactive Classes</h3>
+                    <p>Engage with expert tutors in real-time video sessions. Ask questions, participate in discussions, and learn effectively.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3>Expert Tutors</h3>
+                    <p>Learn from certified educators with years of experience. Get personalized attention and guidance.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Performance Tracking</h3>
+                    <p>Monitor your progress with detailed analytics, grades, and comprehensive semester reports.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI & Digital Skills</h3>
+                    <p>Gain cutting-edge skills in Artificial Intelligence and Digital Marketing for the modern world.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Special Education</h3>
+                    <p>Inclusive programs designed for diverse learning needs with specialized support and resources.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3>Accredited Certificates</h3>
+                    <p>Earn recognized certificates upon successful completion. Advance to higher grades systematically.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Education?</h2>
+            <p>Join thousands of successful students learning with Mindbridge. Start your journey today with our flexible semester-based programs.</p>
+            <div class="hero-buttons" style="justify-content: center;">
+                <button class="btn btn-primary" onclick="showEnrollModal()">Enroll Now - From $100/semester</button>
+                <button class="btn btn-outline" style="background: rgba(255,255,255,0.1); color: white; border-color: white;" onclick="showLoginModal()">Login to Dashboard</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h4>Mindbridge</h4>
+                <p>Empowering students worldwide with accessible, quality online education. Learn from expert tutors and achieve your academic goals.</p>
+                <div style="margin-top: 1.5rem;">
+                    <p style="margin-bottom: 0.5rem;">📧 info@mindbridge.edu</p>
+                    <p>📞 +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h5>Programs</h5>
+                <a href="#">High School Core</a>
+                <a href="#">Artificial Intelligence</a>
+                <a href="#">Digital Marketing</a>
+                <a href="#">Educational Coaching</a>
+                <a href="#">Special Education</a>
+            </div>
+            <div class="footer-section">
+                <h5>Platform</h5>
+                <a href="#" onclick="showLoginModal(); return false;">Student Login</a>
+                <a href="#" onclick="showLoginModal(); return false;">Tutor Login</a>
+                <a href="#" onclick="showLoginModal(); return false;">Parent Login</a>
+                <a href="#" onclick="showLoginModal(); return false;">Admin Login</a>
+            </div>
+            <div class="footer-section">
+                <h5>Support</h5>
+                <a href="#">Help Center</a>
+                <a href="#">FAQs</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mindbridge Online School. All rights reserved. | Transforming Education, One Student at a Time.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function showEnrollModal() {
+            window.location.href = 'mindbridge-index.html#enroll';
+        }
+
+        function showLoginModal() {
+            window.location.href = 'mindbridge-index.html#login';
+        }
+    </script>
+</body>
+</html>

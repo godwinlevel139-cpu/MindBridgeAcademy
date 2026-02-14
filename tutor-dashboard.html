@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutor Portal - Mindbridge Online School</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="mindbridge-styles.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="school-logo-small">MB</div>
+                <h3>Tutor Portal</h3>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="overview">
+                    <span class="icon">📊</span><span>Overview</span>
+                </a>
+                <a href="#" class="nav-item" data-section="schedule">
+                    <span class="icon">📅</span><span>My Schedule</span>
+                </a>
+                <a href="#" class="nav-item" data-section="students">
+                    <span class="icon">👨‍🎓</span><span>My Students</span>
+                </a>
+                <a href="#" class="nav-item" data-section="classes">
+                    <span class="icon">🎥</span><span>Live Classes</span>
+                </a>
+                <a href="#" class="nav-item" data-section="assessments">
+                    <span class="icon">📝</span><span>Assessments</span>
+                </a>
+                <a href="#" class="nav-item" data-section="grading">
+                    <span class="icon">📊</span><span>Grading</span>
+                </a>
+                <a href="#" class="nav-item" data-section="materials">
+                    <span class="icon">📚</span><span>Course Materials</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <span class="icon">⚙️</span><span>Settings</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="logout()">
+                    <span class="icon">🚪</span><span>Logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h1 id="pageTitle">Tutor Dashboard</h1>
+                    <p id="pageSubtitle">Manage your classes and students</p>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">T</div>
+                        <div>
+                            <div class="user-name" id="userName">Loading...</div>
+                            <div class="user-role">Tutor</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <!-- Overview Section -->
+                <section id="overview-section" class="content-section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">👨‍🎓</div>
+                            <div class="stat-info">
+                                <h3 id="totalStudents">0</h3>
+                                <p>Total Students</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">📅</div>
+                            <div class="stat-info">
+                                <h3 id="upcomingClasses">0</h3>
+                                <p>Upcoming Classes</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">📝</div>
+                            <div class="stat-info">
+                                <h3 id="pendingGrading">0</h3>
+                                <p>Pending Grading</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">⭐</div>
+                            <div class="stat-info">
+                                <h3 id="avgRating">5.0</h3>
+                                <p>Average Rating</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="card">
+                            <h3>Today's Schedule</h3>
+                            <div id="todaySchedule"></div>
+                        </div>
+                        <div class="card">
+                            <h3>Recent Activity</h3>
+                            <div id="recentActivity"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Schedule Section -->
+                <section id="schedule-section" class="content-section">
+                    <div class="card">
+                        <h3>📅 My Teaching Schedule</h3>
+                        <p style="color: var(--gray); margin-bottom: 2rem;">Set your available time slots (Morning sessions only: 8:00 AM - 12:00 PM)</p>
+                        
+                        <form id="scheduleForm" style="background: var(--light); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label>Day of Week</label>
+                                <select id="scheduleDay" required>
+                                    <option value="">Select Day</option>
+                                    <option value="Monday">Monday</option>
+                                    <option value="Tuesday">Tuesday</option>
+                                    <option value="Wednesday">Wednesday</option>
+                                    <option value="Thursday">Thursday</option>
+                                    <option value="Friday">Friday</option>
+                                    <option value="Saturday">Saturday</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Start Time (Morning Only)</label>
+                                <select id="scheduleStart" required>
+                                    <option value="">Select Time</option>
+                                    <option value="08:00">8:00 AM</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Duration</label>
+                                <select id="scheduleDuration" required>
+                                    <option value="">Select Duration</option>
+                                    <option value="60">1 Hour</option>
+                                    <option value="90">1.5 Hours</option>
+                                    <option value="120">2 Hours</option>
+                                </select>
+                                <small>Minimum: 1 hour | Maximum: 2 hours</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <select id="scheduleSubject" required></select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Class Type</label>
+                                <select id="classType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="regular">Regular Class</option>
+                                    <option value="tutorial">Tutorial Session</option>
+                                    <option value="exam-prep">Exam Preparation</option>
+                                    <option value="consultation">One-on-One Consultation</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Add to Schedule</button>
+                        </form>
+
+                        <h4 style="margin: 2rem 0 1rem;">Current Schedule</h4>
+                        <div id="scheduleList"></div>
+                    </div>
+                </section>
+
+                <!-- Students Section -->
+                <section id="students-section" class="content-section">
+                    <div class="card">
+                        <h3>My Students</h3>
+                        <div id="studentsList"></div>
+                    </div>
+                </section>
+
+                <!-- Live Classes Section -->
+                <section id="classes-section" class="content-section">
+                    <div class="card">
+                        <h3>🎥 Live Classes & Conferencing</h3>
+                        
+                        <div id="upcomingClassesList"></div>
+                        
+                        <div style="background: #dbeafe; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+                            <h4 style="color: #1e40af; margin-bottom: 0.5rem;">💡 Integration Note</h4>
+                            <p style="color: #1e3a8a; font-size: 0.95rem;">
+                                Video conferencing can be integrated with:
+                                <br>• Zoom API
+                                <br>• Google Meet
+                                <br>• Microsoft Teams
+                                <br>• Jitsi (Open Source)
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Assessments Section -->
+                <section id="assessments-section" class="content-section">
+                    <div class="card">
+                        <h3>📝 Create Assessment</h3>
+                        
+                        <form id="assessmentForm" style="background: var(--light); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                            <div class="form-group">
+                                <label>Assessment Title</label>
+                                <input type="text" id="assessmentTitle" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <select id="assessmentSubject" required></select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Type</label>
+                                <select id="assessmentType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="assignment">Assignment</option>
+                                    <option value="quiz">Quiz</option>
+                                    <option value="test">Test</option>
+                                    <option value="exam">Exam</option>
+                                    <option value="project">Project</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Total Marks</label>
+                                <input type="number" id="assessmentMarks" min="1" max="100" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Due Date</label>
+                                <input type="datetime-local" id="assessmentDue" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Instructions</label>
+                                <textarea id="assessmentInstructions" rows="4" style="width: 100%; padding: 0.875rem; border: 2px solid var(--border); border-radius: 12px; font-family: 'DM Sans', sans-serif;"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">Create Assessment</button>
+                        </form>
+
+                        <h4 style="margin: 2rem 0 1rem;">Active Assessments</h4>
+                        <div id="assessmentsList"></div>
+                    </div>
+                </section>
+
+                <!-- Grading Section -->
+                <section id="grading-section" class="content-section">
+                    <div class="card">
+                        <h3>📊 Grading Spreadsheet</h3>
+                        <p style="color: var(--gray); margin-bottom: 1.5rem;">Grade student assessments and track performance</p>
+                        
+                        <div class="filter-bar" style="margin-bottom: 1.5rem;">
+                            <select id="gradingSubject" class="form-control" onchange="loadGradingSheet()">
+                                <option value="">All Subjects</option>
+                            </select>
+                            <select id="gradingAssessment" class="form-control" onchange="loadGradingSheet()">
+                                <option value="">All Assessments</option>
+                            </select>
+                        </div>
+
+                        <div id="gradingSpreadsheet" style="overflow-x: auto;"></div>
+                        
+                        <button class="btn btn-success" onclick="saveGrades()" style="margin-top: 1.5rem;">💾 Save All Grades</button>
+                        <button class="btn btn-secondary" onclick="generateSemesterResults()" style="margin-top: 1.5rem;">📊 Generate Semester Results</button>
+                    </div>
+                </section>
+
+                <!-- Course Materials Section -->
+                <section id="materials-section" class="content-section">
+                    <div class="card">
+                        <h3>📚 Upload Course Materials</h3>
+                        <p style="color: var(--gray); margin-bottom: 2rem;">Upload notes and videos for your students (Educational purposes only)</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <!-- Upload Notes -->
+                            <div>
+                                <h4 style="margin-bottom: 1rem;">📄 Upload Notes</h4>
+                                <form id="uploadNotesForm" style="background: var(--light); padding: 1.5rem; border-radius: 12px;">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <select id="notesSubject" required></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" id="notesTitle" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Topic</label>
+                                        <input type="text" id="notesTopic" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>File URL (Google Drive, Dropbox, etc.)</label>
+                                        <input type="url" id="notesUrl" required>
+                                        <small>Upload to cloud storage and paste link</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">Upload Notes</button>
+                                </form>
+                            </div>
+
+                            <!-- Upload Videos -->
+                            <div>
+                                <h4 style="margin-bottom: 1rem;">🎥 Upload Videos</h4>
+                                <form id="uploadVideosForm" style="background: var(--light); padding: 1.5rem; border-radius: 12px;">
+                                    <div class="form-group">
+                                        <label>Subject</label>
+                                        <select id="videosSubject" required></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Title</label>
+                                        <input type="text" id="videosTitle" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Topic</label>
+                                        <input type="text" id="videosTopic" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Video URL (YouTube, Vimeo, etc.)</label>
+                                        <input type="url" id="videosUrl" required>
+                                        <small>Educational content only</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" style="width: 100%;">Upload Video</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <h4 style="margin: 2rem 0 1rem;">Uploaded Materials</h4>
+                        <div id="materialsList"></div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings-section" class="content-section">
+                    <div class="card">
+                        <h3>Tutor Profile Settings</h3>
+                        
+                        <form id="tutorSettingsForm">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="settingName" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" id="settingEmail" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Subjects Teaching</label>
+                                <input type="text" id="settingSubjects" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea id="settingBio" rows="4" style="width: 100%; padding: 0.875rem; border: 2px solid var(--border); border-radius: 12px;"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Qualification</label>
+                                <input type="text" id="settingQualification" placeholder="e.g., M.Sc. Mathematics">
+                            </div>
+                            <div class="form-group">
+                                <label>Years of Experience</label>
+                                <input type="number" id="settingExperience" min="0">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="mindbridge-data.js"></script>
+    <script src="tutor-system.js"></script>
+</body>
+</html>
