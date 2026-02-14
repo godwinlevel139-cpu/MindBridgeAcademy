@@ -411,23 +411,69 @@ function showSuccessPage(studentId) {
     `;
 }
 
-// Login Form Submission
+// Login Form Submission - UNIFIED SINGLE LOGIN FOR ALL USERS
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const email = document.getElementById('loginEmail').value;
-    const studentId = document.getElementById('loginStudentId').value;
+    const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+    const studentId = document.getElementById('loginStudentId').value.trim();
     
+    // 1. CHECK ADMIN
+    if (email === 'admin@mindbridge.edu' && studentId === 'admin123') {
+        sessionStorage.setItem('userType', 'admin');
+        sessionStorage.setItem('userId', 'ADMIN001');
+        sessionStorage.setItem('userName', 'Administrator');
+        window.location.href = 'admin-dashboard-mindbridge.html';
+        return;
+    }
+    
+    // 2. CHECK TUTOR
+    const data = MindBridgeData.getData();
+    if (data.tutors) {
+        const tutorIds = Object.keys(data.tutors);
+        for (let tid of tutorIds) {
+            const tutor = data.tutors[tid];
+            if (tutor.email.toLowerCase() === email && tutor.password === studentId) {
+                sessionStorage.setItem('userType', 'tutor');
+                sessionStorage.setItem('userId', tutor.id);
+                sessionStorage.setItem('userName', tutor.name);
+                sessionStorage.setItem('tutorEmail', tutor.email);
+                sessionStorage.setItem('tutorSubjects', JSON.stringify(tutor.subjects));
+                window.location.href = 'tutor-dashboard.html';
+                return;
+            }
+        }
+    }
+    
+    // 3. CHECK STUDENT
     const student = MindBridgeData.students.find(s => 
-        s.email.toLowerCase() === email.toLowerCase() && 
-        s.id === studentId
+        s.email.toLowerCase() === email && s.id === studentId
     );
     
     if (student) {
-        window.location.href = `student-dashboard.html?id=${student.id}`;
-    } else {
-        showLoginAlert('Invalid email or Student ID. Please check your credentials.', 'error');
+        sessionStorage.setItem('userType', 'student');
+        sessionStorage.setItem('studentId', student.id);
+        sessionStorage.setItem('userName', student.name);
+        window.location.href = 'student-dashboard-mindbridge.html?id=' + student.id;
+        return;
     }
+    
+    // 4. CHECK PARENT
+    const parent = MindBridgeData.parents.find(p => 
+        p.email.toLowerCase() === email && p.childAdmissionNumber === studentId
+    );
+    
+    if (parent) {
+        sessionStorage.setItem('userType', 'parent');
+        sessionStorage.setItem('userId', parent.id);
+        sessionStorage.setItem('userName', parent.name);
+        sessionStorage.setItem('childId', parent.childId);
+        window.location.href = 'parent-dashboard-mindbridge.html';
+        return;
+    }
+    
+    // No match found
+    showLoginAlert('Invalid credentials. Please check your email and password/ID.', 'error');
 });
 
 // Close modal when clicking outside
