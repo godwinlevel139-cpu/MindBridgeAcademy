@@ -170,3 +170,4 @@ const MindBridgeData = {
 
 // Initialize on load
 MindBridgeData.init();
+
