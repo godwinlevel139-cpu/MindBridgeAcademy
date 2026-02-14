@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mindbridge - Transform Your Future Through Online Education</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <title>Portal - Mindbridge Online School</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,1065 +13,516 @@
         }
 
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #ec4899;
-            --accent: #f59e0b;
-            --success: #10b981;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --border: #e2e8f0;
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --success: #10B981;
+            --danger: #EF4444;
+            --dark: #0F172A;
+            --gray: #64748B;
+            --border: #E2E8F0;
+            --light: #F8FAFC;
         }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background: #ffffff;
-        }
-
-        /* Header */
-        header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 1.25rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .btn {
-            padding: 0.875rem 1.75rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            font-family: 'DM Sans', sans-serif;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-outline {
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 6rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,106.7C1248,96,1344,96,1392,96L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom/100% auto no-repeat;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Features */
-        .features {
-            padding: 6rem 2rem;
-            background: var(--light);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .section-header p {
-            font-size: 1.25rem;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 15px;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            padding: 2rem;
         }
 
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .feature-card p {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        /* Pricing */
-        .pricing {
-            padding: 6rem 2rem;
-            background: white;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 25px;
-            padding: 3rem 2.5rem;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .pricing-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(99, 102, 241, 0.2);
-        }
-
-        .pricing-card.featured {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(236, 72, 153, 0.05));
-            transform: scale(1.05);
-        }
-
-        .pricing-badge {
-            position: absolute;
-            top: -15px;
-            right: 30px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 700;
-        }
-
-        .pricing-card h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .price {
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1.5rem 0;
-        }
-
-        .price span {
-            font-size: 1.25rem;
-            color: var(--gray);
-        }
-
-        .pricing-features {
-            list-style: none;
-            margin: 2rem 0;
-        }
-
-        .pricing-features li {
-            padding: 0.875rem 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .pricing-features li:last-child {
-            border-bottom: none;
-        }
-
-        .check {
-            color: var(--success);
-            font-weight: 700;
-        }
-
-        /* Courses */
-        .courses {
-            padding: 6rem 2rem;
-            background: var(--light);
-        }
-
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .course-card {
+        .portal-container {
             background: white;
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .course-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            padding: 2rem;
-            color: white;
-            text-align: center;
-        }
-
-        .course-header h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .course-body {
-            padding: 2rem;
-        }
-
-        .course-body ul {
-            list-style: none;
-        }
-
-        .course-body li {
-            padding: 0.5rem 0;
-            color: var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h4 {
-            font-size: 1.25rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Registration Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
             width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 25px;
             padding: 3rem;
-            max-width: 700px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            animation: slideUp 0.3s ease;
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .portal-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            font-size: 2rem;
-            color: var(--gray);
-            cursor: pointer;
-            transition: color 0.3s;
-            width: 40px;
-            height: 40px;
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), #06B6D4);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
         }
 
-        .close-modal:hover {
-            background: var(--light);
-            color: var(--dark);
-        }
-
-        .modal-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .modal-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+        h1 {
+            font-size: 1.75rem;
             color: var(--dark);
             margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            background: var(--light);
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.875rem;
+            border: none;
+            background: transparent;
+            color: var(--gray);
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
         }
 
         .form-group {
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
+        label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
             color: var(--dark);
+            font-size: 0.95rem;
         }
 
-        .form-group input,
-        .form-group select {
+        input, select {
             width: 100%;
             padding: 1rem;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 1rem;
-            font-family: 'DM Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             transition: border-color 0.3s;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        input:focus, select:focus {
             outline: none;
             border-color: var(--primary);
         }
 
-        .form-group small {
+        small {
             display: block;
             margin-top: 0.5rem;
             color: var(--gray);
             font-size: 0.875rem;
         }
 
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-        }
-
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: 12px;
+        .btn {
+            width: 100%;
+            padding: 1.125rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .checkbox-label:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
         }
 
-        .checkbox-label input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-
-        .fee-summary {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
-
-        .fee-summary h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .fee-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .fee-item:last-child {
-            border-bottom: none;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary);
-            padding-top: 1rem;
-            margin-top: 0.5rem;
-            border-top: 2px solid rgba(0, 0, 0, 0.2);
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
         }
 
         .alert {
             padding: 1rem;
-            border-radius: 12px;
+            border-radius: 10px;
             margin-bottom: 1.5rem;
             display: none;
         }
 
         .alert.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 2px solid #6ee7b7;
+            background: #D1FAE5;
+            color: #065F46;
+            border: 2px solid #6EE7B7;
         }
 
         .alert.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 2px solid #fca5a5;
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 2px solid #FCA5A5;
         }
 
         .alert.active {
             display: block;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+        .info-box {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            text-align: center;
+        }
 
-            .hero p {
-                font-size: 1.125rem;
-            }
+        .info-box small {
+            color: var(--gray);
+            margin: 0;
+        }
 
-            .nav-links {
-                display: none;
-            }
-
-            .pricing-card.featured {
-                transform: none;
-            }
-
-            .modal-content {
+        @media (max-width: 640px) {
+            .portal-container {
                 padding: 2rem 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">Mindbridge</div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#courses">Courses</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#" onclick="showLoginModal()">Login</a>
-                <button class="btn btn-primary" onclick="showRegistrationModal()">Enroll Now</button>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Transform Your Future Through Online Education</h1>
-            <p>World-class education in High School subjects, AI, Digital Marketing, Educational Coaching, and Special Education</p>
-            <div class="hero-buttons">
-                <button class="btn btn-primary" onclick="showRegistrationModal()">Start Learning Today</button>
-                <button class="btn btn-outline" style="background: rgba(255,255,255,0.2); color: white; border-color: white;" onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})">Explore Courses</button>
-            </div>
+    <div class="portal-container">
+        <div class="portal-header">
+            <div class="logo-circle">M</div>
+            <h1>Mindbridge Portal</h1>
+            <p class="subtitle">Access Your Learning Dashboard</p>
         </div>
-    </section>
 
-    <!-- Features -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose Mindbridge?</h2>
-                <p>Experience education that adapts to your needs with our innovative learning platform</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <h3>Flexible Learning</h3>
-                    <p>Study at your own pace with our semester-based system. 3 months per semester with comprehensive curriculum coverage.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">👨‍🏫</div>
-                    <h3>Expert Instructors</h3>
-                    <p>Learn from certified educators and industry professionals with years of experience in their fields.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI-Powered Learning</h3>
-                    <p>Leverage cutting-edge AI technology to personalize your learning experience and track progress.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💼</div>
-                    <h3>Career-Ready Skills</h3>
-                    <p>Gain practical skills in Digital Marketing, AI, and more that are in high demand in today's job market.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌟</div>
-                    <h3>Special Education</h3>
-                    <p>Inclusive learning programs designed for students with diverse learning needs and abilities.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📜</div>
-                    <h3>Accredited Certificates</h3>
-                    <p>Earn recognized certificates upon completion of your courses and semesters.</p>
-                </div>
-            </div>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('login')">Login</button>
+            <button class="tab" onclick="switchTab('register')">Register</button>
         </div>
-    </section>
 
-    <!-- Courses -->
-    <section class="courses" id="courses">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Course Offerings</h2>
-                <p>Comprehensive education programs designed for success</p>
-            </div>
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-header">
-                        <h3>📚 High School Subjects</h3>
-                    </div>
-                    <div class="course-body">
-                        <ul>
-                            <li>✓ Mathematics</li>
-                            <li>✓ English Language</li>
-                            <li>✓ Sciences (Biology, Chemistry, Physics)</li>
-                            <li>✓ Social Studies</li>
-                            <li>✓ History & Geography</li>
-                            <li>✓ Literature</li>
-                            <li>✓ And more...</li>
-                        </ul>
-                    </div>
-                </div>
+        <div id="alertBox" class="alert"></div>
 
-                <div class="course-card">
-                    <div class="course-header" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">
-                        <h3>🤖 Artificial Intelligence</h3>
-                    </div>
-                    <div class="course-body">
-                        <ul>
-                            <li>✓ AI Fundamentals</li>
-                            <li>✓ Machine Learning Basics</li>
-                            <li>✓ Python for AI</li>
-                            <li>✓ Neural Networks</li>
-                            <li>✓ AI Ethics</li>
-                            <li>✓ Practical Projects</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-header" style="background: linear-gradient(135deg, #f59e0b, #f97316);">
-                        <h3>📱 Digital Marketing</h3>
-                    </div>
-                    <div class="course-body">
-                        <ul>
-                            <li>✓ Social Media Marketing</li>
-                            <li>✓ SEO & SEM</li>
-                            <li>✓ Content Marketing</li>
-                            <li>✓ Email Marketing</li>
-                            <li>✓ Analytics & Metrics</li>
-                            <li>✓ Brand Strategy</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-header" style="background: linear-gradient(135deg, #10b981, #059669);">
-                        <h3>🎯 Educational Coaching</h3>
-                    </div>
-                    <div class="course-body">
-                        <ul>
-                            <li>✓ Study Skills</li>
-                            <li>✓ Time Management</li>
-                            <li>✓ Goal Setting</li>
-                            <li>✓ Learning Strategies</li>
-                            <li>✓ Test Preparation</li>
-                            <li>✓ Personal Development</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="course-card">
-                    <div class="course-header" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
-                        <h3>♿ Special Education</h3>
-                    </div>
-                    <div class="course-body">
-                        <ul>
-                            <li>✓ Learning Disabilities Support</li>
-                            <li>✓ Autism Spectrum Programs</li>
-                            <li>✓ ADHD Management</li>
-                            <li>✓ Emotional & Behavioral Support</li>
-                            <li>✓ Individualized Learning Plans</li>
-                            <li>✓ Adaptive Technologies</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2>Flexible Pricing Plans</h2>
-                <p>Choose the plan that fits your educational goals</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Special Education Only</h3>
-                    <div class="price">$100<span>/semester</span></div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> All Special Education Programs</li>
-                        <li><span class="check">✓</span> Individualized Learning Plan</li>
-                        <li><span class="check">✓</span> Adaptive Learning Tools</li>
-                        <li><span class="check">✓</span> Progress Monitoring</li>
-                        <li><span class="check">✓</span> 3 Months Duration</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;" onclick="showRegistrationModal()">Enroll Now</button>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="pricing-badge">Most Popular</div>
-                    <h3>High School Core</h3>
-                    <div class="price">$150<span>/semester</span></div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> All High School Subjects</li>
-                        <li><span class="check">✓</span> Interactive Lessons</li>
-                        <li><span class="check">✓</span> Assignments & Quizzes</li>
-                        <li><span class="check">✓</span> Progress Reports</li>
-                        <li><span class="check">✓</span> Certificate of Completion</li>
-                        <li><span class="check">✓</span> 3 Months Duration</li>
-                    </ul>
-                    <button class="btn btn-primary" style="width: 100%;" onclick="showRegistrationModal()">Enroll Now</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3>Single Extra Course</h3>
-                    <div class="price">$150<span>/semester</span></div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> AI OR Digital Marketing</li>
-                        <li><span class="check">✓</span> OR Educational Coaching</li>
-                        <li><span class="check">✓</span> Expert Instruction</li>
-                        <li><span class="check">✓</span> Hands-on Projects</li>
-                        <li><span class="check">✓</span> Industry Certificate</li>
-                        <li><span class="check">✓</span> 3 Months Duration</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;" onclick="showRegistrationModal()">Enroll Now</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3>Core + 1 Extra</h3>
-                    <div class="price">$200<span>/semester</span></div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> All High School Subjects</li>
-                        <li><span class="check">✓</span> Plus ONE extra course</li>
-                        <li><span class="check">✓</span> AI, Digital Marketing, or Coaching</li>
-                        <li><span class="check">✓</span> All Core Benefits</li>
-                        <li><span class="check">✓</span> Dual Certificates</li>
-                        <li><span class="check">✓</span> 3 Months Duration</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;" onclick="showRegistrationModal()">Enroll Now</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3>Core + 2 Extras</h3>
-                    <div class="price">$235<span>/semester</span></div>
-                    <ul class="pricing-features">
-                        <li><span class="check">✓</span> All High School Subjects</li>
-                        <li><span class="check">✓</span> Plus TWO extra courses</li>
-                        <li><span class="check">✓</span> Choose any 2 extras</li>
-                        <li><span class="check">✓</span> Premium Support</li>
-                        <li><span class="check">✓</span> Multiple Certificates</li>
-                        <li><span class="check">✓</span> 3 Months Duration</li>
-                    </ul>
-                    <button class="btn btn-outline" style="width: 100%;" onclick="showRegistrationModal()">Enroll Now</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Mindbridge</h4>
-                <p>Empowering learners worldwide with accessible, quality online education.</p>
-                <p style="margin-top: 1.5rem;">📧 info@mindbridge.edu</p>
-                <p>📞 +1 (555) 123-4567</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <a href="#features">Features</a>
-                <a href="#courses">Courses</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#" onclick="showRegistrationModal(); return false;">Enroll Now</a>
-            </div>
-            <div class="footer-section">
-                <h4>Programs</h4>
-                <a href="#">High School Subjects</a>
-                <a href="#">Artificial Intelligence</a>
-                <a href="#">Digital Marketing</a>
-                <a href="#">Educational Coaching</a>
-                <a href="#">Special Education</a>
-            </div>
-            <div class="footer-section">
-                <h4>Support</h4>
-                <a href="#">Help Center</a>
-                <a href="#">Student Portal</a>
-                <a href="#">FAQs</a>
-                <a href="#">Contact Us</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Mindbridge Online School. All rights reserved. | Transforming Education, One Student at a Time</p>
-        </div>
-    </footer>
-
-    <!-- Registration Modal -->
-    <div class="modal" id="registrationModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeModal('registrationModal')">&times;</button>
-            
-            <div class="modal-header">
-                <h2>Student Enrollment</h2>
-                <p style="color: var(--gray);">Join Mindbridge and start your learning journey</p>
-            </div>
-
-            <div id="alertBox" class="alert"></div>
-
-            <form id="enrollmentForm">
-                <div class="form-group">
-                    <label>Full Name *</label>
-                    <input type="text" id="studentName" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Email Address *</label>
-                    <input type="email" id="studentEmail" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Phone Number *</label>
-                    <input type="tel" id="studentPhone" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Date of Birth *</label>
-                    <input type="date" id="studentDOB" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Select Your Program *</label>
-                    <select id="programType" required onchange="updateProgramOptions()">
-                        <option value="">-- Choose Program --</option>
-                        <option value="special-only">Special Education Only - $100</option>
-                        <option value="core-only">High School Core Only - $150</option>
-                        <option value="single-extra">Single Extra Course Only - $150</option>
-                        <option value="core-plus">High School Core + Extra Courses</option>
-                    </select>
-                    <small>Semester duration: 3 months</small>
-                </div>
-
-                <!-- Special Education Categories -->
-                <div class="form-group" id="specialEdSection" style="display: none;">
-                    <label>Special Education Category *</label>
-                    <select id="specialEdType">
-                        <option value="">-- Select Category --</option>
-                        <option value="learning-disabilities">Learning Disabilities Support</option>
-                        <option value="autism">Autism Spectrum Disorder Programs</option>
-                        <option value="adhd">ADHD/ADD Management</option>
-                        <option value="emotional-behavioral">Emotional & Behavioral Support</option>
-                    </select>
-                </div>
-
-                <!-- Single Extra Course Selection -->
-                <div class="form-group" id="singleExtraSection" style="display: none;">
-                    <label>Choose Your Course *</label>
-                    <select id="singleExtraCourse">
-                        <option value="">-- Select Course --</option>
-                        <option value="ai">Artificial Intelligence</option>
-                        <option value="digital-marketing">Digital Marketing</option>
-                        <option value="educational-coaching">Educational Coaching</option>
-                    </select>
-                </div>
-
-                <!-- Extra Courses Selection -->
-                <div class="form-group" id="extraCoursesSection" style="display: none;">
-                    <label>Select Extra Courses (Choose 1 or 2)</label>
-                    <small>1 extra course = $200 total | 2 extra courses = $235 total</small>
-                    <div class="checkbox-group">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="extraCourse" value="ai" onchange="calculateFees()">
-                            <span>🤖 Artificial Intelligence</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="extraCourse" value="digital-marketing" onchange="calculateFees()">
-                            <span>📱 Digital Marketing</span>
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="extraCourse" value="educational-coaching" onchange="calculateFees()">
-                            <span>🎯 Educational Coaching</span>
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Parent/Guardian Name *</label>
-                    <input type="text" id="parentName" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Parent/Guardian Email *</label>
-                    <input type="email" id="parentEmail" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Parent/Guardian Phone *</label>
-                    <input type="tel" id="parentPhone" required>
-                </div>
-
-                <!-- Fee Summary -->
-                <div class="fee-summary" id="feeSummary" style="display: none;">
-                    <h3>📊 Fee Summary</h3>
-                    <div class="fee-item">
-                        <span>Program</span>
-                        <span id="programFee">$0</span>
-                    </div>
-                    <div class="fee-item" id="extraFeeRow" style="display: none;">
-                        <span>Extra Courses</span>
-                        <span id="extraFee">$0</span>
-                    </div>
-                    <div class="fee-item">
-                        <span>Total Per Semester</span>
-                        <span id="totalFee">$0</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem; font-size: 1.125rem; margin-top: 1.5rem;">
-                    Proceed to Payment
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Login Modal -->
-    <div class="modal" id="loginModal">
-        <div class="modal-content" style="max-width: 500px;">
-            <button class="close-modal" onclick="closeModal('loginModal')">&times;</button>
-            
-            <div class="modal-header">
-                <h2>Student Login</h2>
-                <p style="color: var(--gray);">Access your learning dashboard</p>
-            </div>
-
-            <div id="loginAlertBox" class="alert"></div>
-
+        <!-- Login Section -->
+        <div id="login-section" class="form-section active">
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" id="loginEmail" required>
+                    <label>I am logging in as:</label>
+                    <select id="loginRole" required>
+                        <option value="">-- Select Your Role --</option>
+                        <option value="student">🎓 Student</option>
+                        <option value="tutor">👨‍🏫 Tutor</option>
+                        <option value="parent">👨‍👩‍👧 Parent</option>
+                        <option value="admin">👨‍💼 Admin</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                    <label>Student ID</label>
-                    <input type="text" id="loginStudentId" placeholder="Your enrollment ID" required>
-                    <small>Check your enrollment confirmation email for your Student ID</small>
+                    <label>Email / Username</label>
+                    <input type="text" id="loginEmail" required placeholder="your.email@example.com">
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.25rem;">
-                    Login to Dashboard
-                </button>
+                <div class="form-group">
+                    <label>Password / Student ID</label>
+                    <input type="text" id="loginPassword" required placeholder="Enter your password or Student ID">
+                    <small>Students: Use Student ID | Tutors/Admin/Parents: Use password</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Login</button>
+
+                <div class="info-box">
+                    <small><strong>Admin Login:</strong> admin@mindbridge.edu / admin123</small>
+                </div>
+            </form>
+        </div>
+
+        <!-- Register Section -->
+        <div id="register-section" class="form-section">
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>I want to register as:</label>
+                    <select id="registerType" required onchange="updateRegisterForm()">
+                        <option value="">-- Select Type --</option>
+                        <option value="tutor">👨‍🏫 Tutor</option>
+                        <option value="parent">👨‍👩‍👧 Parent</option>
+                    </select>
+                    <small>Students: Please use "Enroll Now" button on homepage</small>
+                </div>
+
+                <div id="tutorFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="tutorName">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="tutorEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="tutorPassword">
+                        <small>Minimum 6 characters</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Subjects You Can Teach (Hold Ctrl/Cmd for multiple)</label>
+                        <select id="tutorSubjects" multiple size="6">
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="English Language">English Language</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Artificial Intelligence">Artificial Intelligence</option>
+                            <option value="Digital Marketing">Digital Marketing</option>
+                            <option value="Educational Coaching">Educational Coaching</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="parentFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Parent Name</label>
+                        <input type="text" id="parentName">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="parentEmail">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="parentPhone">
+                    </div>
+                    <div class="form-group">
+                        <label>Child's Student ID</label>
+                        <input type="text" id="parentChildId" placeholder="e.g., MB1234567">
+                        <small>Enter your child's Student ID from their enrollment</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
             </form>
         </div>
     </div>
 
     <script src="mindbridge-data.js"></script>
-    <script src="mindbridge-main.js"></script>
+    <script>
+        // Auto-open login if #login in URL
+        if (window.location.hash === '#login') {
+            switchTab('login');
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+            
+            if (tab === 'login') {
+                document.querySelectorAll('.tab')[0].classList.add('active');
+                document.getElementById('login-section').classList.add('active');
+            } else {
+                document.querySelectorAll('.tab')[1].classList.add('active');
+                document.getElementById('register-section').classList.add('active');
+            }
+            hideAlert();
+        }
+
+        function updateRegisterForm() {
+            const type = document.getElementById('registerType').value;
+            document.getElementById('tutorFields').style.display = type === 'tutor' ? 'block' : 'none';
+            document.getElementById('parentFields').style.display = type === 'parent' ? 'block' : 'none';
+        }
+
+        function showAlert(message, type) {
+            const alert = document.getElementById('alertBox');
+            alert.textContent = message;
+            alert.className = `alert ${type} active`;
+        }
+
+        function hideAlert() {
+            document.getElementById('alertBox').classList.remove('active', 'success', 'error');
+        }
+
+        // LOGIN FORM
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const role = document.getElementById('loginRole').value;
+            const email = document.getElementById('loginEmail').value.toLowerCase().trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            
+            if (!role) {
+                showAlert('Please select your role', 'error');
+                return;
+            }
+            
+            hideAlert();
+            
+            // ADMIN
+            if (role === 'admin') {
+                if (email === 'admin@mindbridge.edu' && password === 'admin123') {
+                    sessionStorage.setItem('userType', 'admin');
+                    sessionStorage.setItem('userId', 'ADMIN001');
+                    sessionStorage.setItem('userName', 'Administrator');
+                    showAlert('Admin login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'admin-dashboard-mindbridge.html', 1000);
+                    return;
+                }
+            }
+            
+            const data = MindBridgeData.getData();
+            
+            // TUTOR
+            if (role === 'tutor') {
+                let tutor = null;
+                if (data.tutors) {
+                    Object.values(data.tutors).forEach(t => {
+                        if (t.email.toLowerCase() === email && t.password === password) {
+                            tutor = t;
+                        }
+                    });
+                }
+                
+                if (tutor) {
+                    sessionStorage.setItem('userType', 'tutor');
+                    sessionStorage.setItem('userId', tutor.id);
+                    sessionStorage.setItem('userName', tutor.name);
+                    sessionStorage.setItem('tutorEmail', tutor.email);
+                    sessionStorage.setItem('tutorSubjects', JSON.stringify(tutor.subjects));
+                    showAlert('Tutor login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'tutor-dashboard.html', 1000);
+                    return;
+                }
+            }
+            
+            // STUDENT
+            if (role === 'student') {
+                const student = data.students.find(s => 
+                    s.email.toLowerCase() === email && s.id === password
+                );
+                
+                if (student) {
+                    sessionStorage.setItem('userType', 'student');
+                    sessionStorage.setItem('studentId', student.id);
+                    sessionStorage.setItem('userName', student.name);
+                    showAlert('Student login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'student-dashboard-mindbridge.html?id=' + student.id, 1000);
+                    return;
+                }
+            }
+            
+            // PARENT
+            if (role === 'parent') {
+                const parent = data.parents.find(p => 
+                    p.email.toLowerCase() === email && p.childAdmissionNumber === password
+                );
+                
+                if (parent) {
+                    sessionStorage.setItem('userType', 'parent');
+                    sessionStorage.setItem('userId', parent.id);
+                    sessionStorage.setItem('userName', parent.name);
+                    sessionStorage.setItem('childId', parent.childId);
+                    showAlert('Parent login successful! Redirecting...', 'success');
+                    setTimeout(() => window.location.href = 'parent-dashboard-mindbridge.html', 1000);
+                    return;
+                }
+            }
+            
+            showAlert('Invalid credentials. Please check your role, email, and password.', 'error');
+        });
+
+        // REGISTER FORM
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const type = document.getElementById('registerType').value;
+            
+            if (type === 'tutor') {
+                const name = document.getElementById('tutorName').value;
+                const email = document.getElementById('tutorEmail').value;
+                const password = document.getElementById('tutorPassword').value;
+                const subjects = Array.from(document.getElementById('tutorSubjects').selectedOptions).map(o => o.value);
+                
+                if (password.length < 6) {
+                    showAlert('Password must be at least 6 characters', 'error');
+                    return;
+                }
+                
+                if (subjects.length === 0) {
+                    showAlert('Please select at least one subject', 'error');
+                    return;
+                }
+                
+                const data = MindBridgeData.getData();
+                if (!data.tutors) data.tutors = {};
+                
+                const tutorId = 'TUT' + Date.now();
+                data.tutors[tutorId] = {
+                    id: tutorId,
+                    name: name,
+                    email: email,
+                    password: password,
+                    subjects: subjects,
+                    rating: 5.0,
+                    status: 'active',
+                    dateJoined: new Date().toISOString()
+                };
+                
+                MindBridgeData.saveData(data);
+                
+                showAlert('Tutor registered successfully! You can now login.', 'success');
+                this.reset();
+                setTimeout(() => switchTab('login'), 2000);
+                
+            } else if (type === 'parent') {
+                const name = document.getElementById('parentName').value;
+                const email = document.getElementById('parentEmail').value;
+                const phone = document.getElementById('parentPhone').value;
+                const childId = document.getElementById('parentChildId').value;
+                
+                const data = MindBridgeData.getData();
+                const child = data.students.find(s => s.id === childId);
+                
+                if (!child) {
+                    showAlert('Child Student ID not found! Please check and try again.', 'error');
+                    return;
+                }
+                
+                if (!data.parents) data.parents = [];
+                
+                data.parents.push({
+                    id: 'PAR' + Date.now(),
+                    name: name,
+                    email: email,
+                    phoneNumber: phone,
+                    childId: child.id,
+                    childAdmissionNumber: childId
+                });
+                
+                MindBridgeData.saveData(data);
+                
+                showAlert(`Parent registered! Login with email and child ID: ${childId}`, 'success');
+                this.reset();
+                setTimeout(() => switchTab('login'), 2000);
+            }
+        });
+    </script>
 </body>
 </html>
 
