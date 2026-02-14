@@ -773,3 +773,4 @@ function logout() {
         window.location.href = 'mindbridge-index.html';
     }
 }
+
